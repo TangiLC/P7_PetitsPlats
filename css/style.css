@@ -1,0 +1,53 @@
+header{
+    display : flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+header img{
+    border : 0px;
+}
+
+.main_input{
+    width:97%;
+    height:2rem;
+    font-size:150%;
+    background-color: lightgray;
+    border:none;
+    margin:auto;
+    padding:8px;
+}
+.magnify{
+    max-width:2%;
+    font-size: 150%;
+    background-color: lightgray;
+    border:none;
+    margin-left:-2.2rem;
+}
+
+.flex_row{
+    display : flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap:30px;
+}
+.flex_row div{
+    margin:10px;
+    padding:10px;
+}
+
+#ingredients{
+    background-color: #3282F7;
+    color:white;
+}
+
+#appareils{
+    background-color: #68D9A4;
+    color:white;
+}
+
+#ustensiles{
+    background-color: #ED6454;
+    color:white;
+}
