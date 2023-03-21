@@ -55,5 +55,11 @@ return articleCard;
 }
 
 
-
+function addTag(val){
+    const tagButton = document.createElement("button");
+    tagButton.setAttribute("onclick",`deleteTag(button_${val})`);
+    tagButton.setAttribute("class",`button_${val}`);
+    tagButton.innerText=val+" X";
+return tagButton;
+}
 
