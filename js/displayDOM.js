@@ -1,8 +1,9 @@
-let recipesList=[]
-let keywordsList=[{'test':[999]}]
+const datasearch=document.querySelector(".main_input");
+const cardGrid= document.getElementById("cardGrid"); 
+let searchWords =[""]
 
 function displayCardDOM(myList){
-    const cardGrid= document.getElementById("cardGrid"); 
+    
     if (myList.length==0){console.log('liste vide')}
     else {
     for (let i=0; i<myList.length;i++){
@@ -11,6 +12,25 @@ function displayCardDOM(myList){
     }
 }
 
+function resetDisplay(myList,val){
+  cardGrid.innerHTML="";
+  let newList=myList;
+  console.log(val);
+  if (val.length>2){
+    datasearch.addEventListener("keydown", function (e) {
+       
+       if (e.keyCode==13) {
+        searchWords.push(val);}
+    })
+    let tempSearch=[val];
+    tempSearch=tempSearch.concat(searchWords);
+    console.log(tempSearch);
+    console.log(myList);
+    newList =myList.filter(recip =>
+      tempSearch.every(key => recip.keywords.some(keyword =>keyword.includes(key))))
+  }
+  displayCardDOM(newList);
+}
 
 
 fetch('./data/recipes.json')
@@ -21,31 +41,12 @@ fetch('./data/recipes.json')
     }
 
     recipes.json().then(function (list) {  
-        for (let i = 0; i < list.length; i++) {
-          let words=[];
-          
-          words=words.concat(moreThanThree(list[i].ingredients.map(x => x.ingredient)));
-          //keywords=keywords.concat(moreThanThree(list[i].ingredients.map(a => a.unit)));
-          words=words.concat(moreThanThree(superSplit(list[i].name)));
-          words=words.concat(moreThanThree(superSplit(list[i].description)));
-          
-          words.sort();
-          let keyWords=[...new Set(words)];
-          console.log(keyWords);
-          list[i]['keywords']=keyWords;
-          recipesList.push(list[i]);
-
-          for (let j = 0; j < keyWords.length; j++) {
-            let newWord=keyWords[j];
-            let control=Object.keys(keywordsList).indexOf(newWord)
-            if (control!=-1){keywordsList[newWord]+=list[i].id+', '}
-            else {keywordsList[newWord]=list[i].id+' ,';}
-          }
-          
-          
-          console.log(keywordsList);
-            }
-        displayCardDOM(recipesList);
+        let recipesList=createKeywordList(list);
+        console.log(recipesList);
+        
+        datasearch.addEventListener('input',function() {resetDisplay(recipesList,datasearch.value)})
+        
+        //displayCardDOM(recipesList);
         }) 
     })
   

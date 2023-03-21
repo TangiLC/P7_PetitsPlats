@@ -1,4 +1,5 @@
 function cardDOM(elem){
+let cardId=elem.id;
 let cardTitle=elem.name;
 let cardTime=elem.time;
 let cardIngredients=elem.ingredients;
@@ -11,7 +12,7 @@ articleCard.setAttribute("class","card_content");
 
 const cardImg = document.createElement("div");
 cardImg.setAttribute("class","card_img");
-cardImg.textContent=`${keywords}`;
+cardImg.textContent=`${cardId} :${keywords}`;
 articleCard.appendChild(cardImg);
 
 const innerTitle = document.createElement("div");
