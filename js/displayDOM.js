@@ -1,6 +1,9 @@
 const datasearch=document.querySelector(".main_input");
+const mainForm=document.querySelector(".main_form");
 const cardGrid= document.getElementById("cardGrid"); 
 let searchWords =[""]
+
+
 
 function displayCardDOM(myList){
     
@@ -15,7 +18,7 @@ function displayCardDOM(myList){
 function resetDisplay(myList,val){
   cardGrid.innerHTML="";
   let newList=myList;
-  console.log(val);
+  console.log(val, searchWords);
   if (val.length>2){
     datasearch.addEventListener("keydown", function (e) {
        
