@@ -33,7 +33,7 @@ innerContent.setAttribute("class","content_row");
 articleCard.appendChild(innerContent);
 
 const innerLeft = document.createElement("ul");
-for (let j=0; j<cardIngredients.length; j++){console.log(cardIngredients);
+for (let j=0; j<cardIngredients.length; j++){
     ingredInnerHTML+="<li><span>"+cardIngredients[j].ingredient+"</span>";
     if (cardIngredients[j].hasOwnProperty('quantity')){ingredInnerHTML+=" : "+cardIngredients[j].quantity}
     if (cardIngredients[j].hasOwnProperty('unit')){ingredInnerHTML+=cardIngredients[j].unit}

@@ -1,5 +1,5 @@
 let recipesList=[]
-let keywordsList=[]
+let keywordsList=[{'word':'test','recipeId':[999]}]
 
 function displayCardDOM(myList){
     const cardGrid= document.getElementById("cardGrid"); 
@@ -33,11 +33,19 @@ fetch('./data/recipes.json')
           let keyWords=[...new Set(words)];
           console.log(keyWords);
           list[i]['keywords']=keyWords;
-          //for (let j=0;j<keyWords.length; j++){
-          //  keywordsList.push({keyWords[j]:list[i].id})
-          //}
           recipesList.push(list[i]);
-          console.log(list[i]);
+
+          for (let j = 0; j < keyWords.length; j++) {
+            let newWord=keyWords[j];
+            let control=0;
+            for (let k= 0; k<keywordsList.length; k++)
+               {if (newWord in keywordsList[k]){control+=k}}
+            if (control>0){keywordsList[control].recipeId.push(list[i].id)}
+            else {keywordsList.push({'word':newWord,'recipeId':list[i].id});}
+          }
+          
+          
+          console.log(keywordsList);
             }
         displayCardDOM(recipesList);
         }) 
