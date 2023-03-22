@@ -28,3 +28,15 @@ function isAlphanumeric(str) {
     return ssplit;
   }
   
+  function highlight(arr){
+    const tagCheck=document.querySelectorAll(".tag_check");
+      tagCheck.forEach(function(elem){
+        for (let i=0;i<arr.length;i++){
+          let tempStr = elem.innerHTML;
+          if (arr[i]=='recette'){arr[i]=''}
+          let Arr=arr[i][0].toUpperCase()+arr[i].substring(1);
+        elem.innerHTML = tempStr.replaceAll(`${arr[i]}`,`<span class='highlight'>${arr[i]}</span>`);
+        tempStr = elem.innerHTML;
+        elem.innerHTML = tempStr.replaceAll(`${Arr}`,`<span class='highlight'>${Arr}</span>`);
+     }})
+  }

@@ -12,7 +12,6 @@ articleCard.setAttribute("class","card_content");
 
 const cardImg = document.createElement("div");
 cardImg.setAttribute("class","card_img");
-cardImg.setAttribute("class","card_img");
 let bgcol =(((cardId+30)*3).toString(16).padStart(2,'a')).toString();
 bgcol ="#"+bgcol+bgcol+bgcol;
 cardImg.textContent=`${cardId} ${bgcol}:${keywords}`;
@@ -24,7 +23,7 @@ innerTitle.setAttribute("class","title_row")
 articleCard.appendChild(innerTitle);
 
 const titleName = document.createElement("div");
-titleName.setAttribute("class","card_title");
+titleName.setAttribute("class","card_title tag_check");
 titleName.textContent = cardTitle;
 innerTitle.appendChild(titleName);
 
@@ -39,7 +38,7 @@ articleCard.appendChild(innerContent);
 
 const innerLeft = document.createElement("ul");
 for (let j=0; j<cardIngredients.length; j++){
-    ingredInnerHTML+="<li><span>"+cardIngredients[j].ingredient+"</span>";
+    ingredInnerHTML+="<li class='tag_check'><span>"+cardIngredients[j].ingredient+"</span>";
     if (cardIngredients[j].hasOwnProperty('quantity')){ingredInnerHTML+=" : "+cardIngredients[j].quantity}
     if (cardIngredients[j].hasOwnProperty('unit')){ingredInnerHTML+=cardIngredients[j].unit}
     ingredInnerHTML+="</li>";
@@ -51,7 +50,7 @@ innerContent.appendChild(innerLeft);
 
 const innerRight = document.createElement("div");
 innerRight.textContent = cardDescription.slice(0,175)+"...";
-innerRight.setAttribute("class","inner_right");
+innerRight.setAttribute("class","inner_right tag_check");
 innerContent.appendChild(innerRight);
 
 
@@ -61,7 +60,7 @@ return articleCard;
 
 function addTag(clas,val){
     const tagButton = document.createElement("button");
-    tagButton.setAttribute("onclick",`deleteTag('${clas}',button_${val})`);
+    tagButton.setAttribute("onclick",`deleteTag('${clas}','${val}')`);
     tagButton.setAttribute("class",`color_${clas} button_${val}`);
     tagButton.innerHTML=`${val}&nbsp;<i class="fa-solid fa-circle-xmark"></i>`;
 return tagButton;

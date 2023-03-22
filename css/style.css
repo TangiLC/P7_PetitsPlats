@@ -4,6 +4,14 @@ body{
     font-family: 'Lato', sans-serif;
 }
 
+#recipNb{
+    font-size:120%;
+    background:rgba(50, 130, 247, .4);
+}
+.highlight{
+    background: #3282F7;
+    color: white;
+}
 header{
     display : flex;
     flex-direction: row;
@@ -46,24 +54,26 @@ header img{
 .color_s{
     background-color: #3282F7;
     color:white;
-    padding:2px;
-    border-radius: 2px;
     margin-top:5px;
 }
 .color_u{
     background-color: #ED6454;
     color:white;
-    padding:2px;
-    border-radius: 2px;
     margin-top:5px;
 }
 .color_a{
     background-color: #68D9A4;
     color:white;
-    padding:2px;
-    border-radius: 2px;
     margin-top:5px;
 }
+
+button{
+    font-size: 120%;
+    padding:6px 20px 6px 20px;
+    border-radius: 7px;
+    border:none;
+}
+
 
 .card_grid{
     display:grid;
