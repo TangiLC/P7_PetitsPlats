@@ -2,20 +2,26 @@ const datasearch=document.querySelector(".main_input");
 const mainForm=document.querySelector(".main_form");
 const cardGrid= document.getElementById("cardGrid"); 
 const tagList= document.getElementById("tagList");
-let searchWords =[""]
+let searchWords =[];
 let recipesList=[];
-let keywordsList=[];
+let ustensilsList=['couteau'];
+let applianceList=['Four'];
 let newList=[];
 
 
+function tagLoop(val,list){
+  for(let i=0;i<list.length;i++){
+    tagList.appendChild(addTag(val,list[i]));
+  }
+}
+
 function displayCardDOM(myList){
     tagList.innerHTML="";
-    if (searchWords.length>1){
-      for(let i=1;i<searchWords.length;i++){
-        console.log('searchword :',searchWords);
-        tagList.appendChild(addTag(searchWords[i]));
-      }
-    }
+    
+    tagLoop('s',searchWords);
+    tagLoop('a',applianceList);
+    tagLoop('u',ustensilsList);
+    
     cardGrid.innerHTML="";
     if (myList.length==0){cardGrid.appendChild(cardDOM(
           { "id": 0,
@@ -44,13 +50,17 @@ function filterDisplay(myList,val){
         setTimeout(datasearch.value="",500)
         displayCardDOM(newList);}
       })
+    if (ustensilsList.length>0){tempSearch=tempSearch.concat(ustensilsList)}
+    if (applianceList.length>0){tempSearch=tempSearch.concat(applianceList)}
+    if (searchWords.length>0){tempSearch=tempSearch.concat(searchWords);}
     
-    
-    tempSearch=tempSearch.concat(searchWords);
     console.log('temp :',tempSearch);
     //console.log(myList);
     newList =myList.filter(recip =>
-      tempSearch.every(key => recip.keywords.some(keyword =>keyword.includes(key))))
+      tempSearch.every(key => 
+          recip.keywords.some(keyword =>keyword.includes(key)) ||
+          recip.appliance.includes(key) ||
+          recip.ustensils.some(keyword => keyword.includes(key))))
   }
   displayCardDOM(newList);
   
@@ -71,16 +81,7 @@ function createKeywordList(list){
     list[i]['keywords']=keyWords;
     
 
-    /*for (let j = 0; j < keyWords.length; j++) {
-      let newWord=keyWords[j];
-      let control=Object.keys(keywordsList).indexOf(newWord)
-      if (control!=-1){keywordsList[newWord]+=list[i].id+','}
-      else {keywordsList[newWord]=list[i].id+',';}
-    }
-  }
-  for (let i = 0; i < keywordsList.length; i++) {
-    keywordsList[i].value=keywordsList[i].value.split(',');
-  }*/
+   
    }
   return list;
 }
