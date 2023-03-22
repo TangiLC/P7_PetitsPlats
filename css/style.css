@@ -7,6 +7,7 @@ body{
 #recipNb{
     font-size:120%;
     background:rgba(50, 130, 247, .4);
+    padding-top: 20px;
 }
 .highlight{
     background: #3282F7;
@@ -97,7 +98,7 @@ button{
     display : flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: 170%;
+    font-size: 158%;
     background-color: #E7E7E7;
     padding:15px;
     padding-bottom:0px;

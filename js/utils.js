@@ -24,7 +24,7 @@ function isAlphanumeric(str) {
   }
   
   function superSplit(arr){
-    let ssplit=arr.split('(').join(',').split(')').join(',').split(' ').join(',').split("'").join(',').split(',');
+    let ssplit=arr.split('(').join(',').split(')').join(',').split(' ').join(',').split("'").join(',').split('-').join(',').split(',');
     return ssplit;
   }
   

@@ -13,7 +13,7 @@ articleCard.setAttribute("class","card_content");
 const cardImg = document.createElement("div");
 cardImg.setAttribute("class","card_img");
 let bgcol =(((cardId+30)*3).toString(16).padStart(2,'a')).toString();
-bgcol ="#"+bgcol+bgcol+bgcol;
+bgcol ="#"+bgcol+bgcol+'cc';
 cardImg.textContent=`${cardId} ${bgcol}:${keywords}`;
 cardImg.style.backgroundColor=bgcol;
 articleCard.appendChild(cardImg);
@@ -47,12 +47,10 @@ innerLeft.innerHTML=ingredInnerHTML;
 innerLeft.setAttribute("class","inner_left");
 innerContent.appendChild(innerLeft);
 
-
 const innerRight = document.createElement("div");
 innerRight.textContent = cardDescription.slice(0,175)+"...";
 innerRight.setAttribute("class","inner_right tag_check");
 innerContent.appendChild(innerRight);
-
 
 return articleCard;
 }

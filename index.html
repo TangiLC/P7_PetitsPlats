@@ -28,11 +28,15 @@
         </div>
     </form>
         <div class="flex_row" >
-            <div id="recipNb"></div><div id="tagList" class="flex_row"></div> <!--création des tags--></div>
+            <div id="recipNb">Merci d'entrer un mot-clé pour la recherche</div>
+            <div id="tagList" class="flex_row"></div> <!--création des tags--></div>
         <div class="flex_row">
-            <div id="ingredients" class="flex_row color_s">ingredients <i class="fa-solid fa-angle-down"></i></div>
-            <div id="appareils" class="flex_row color_a">appareils <i class="fa-solid fa-angle-down"></i></div>
-            <div id="ustensiles" class="flex_row color_u">ustensiles <i class="fa-solid fa-angle-down"></i></div>
+            <a onclick="openModal('s')">
+            <div id="ingredients" class="flex_row color_s modal_s">ingredients <i class="fa-solid fa-angle-down"></i></div></a>
+            <a onclick="openModal('a')">
+            <div id="appareils" class="flex_row color_a modal_a">appareils <i class="fa-solid fa-angle-down"></i></div></a>
+            <a onclick="openModal('u')">
+            <div id="ustensiles" class="flex_row color_u modal_u">ustensiles <i class="fa-solid fa-angle-down"></i></div></a>
         </div>
     
 <div><br></div>
@@ -44,8 +48,9 @@
 </main>
 
 <script src="./js/factory/cardDOM_factory.js"></script>
-<script src="./js/displayDOM.js"></script>
 <script src="./js/utils.js"></script>
+<script src="./js/modal.js"></script>
 <script src="./js/keywordSearch.js"></script>
+<script src="./js/displayDOM.js"></script>
 </body>
 </html>
