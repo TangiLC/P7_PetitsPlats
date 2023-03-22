@@ -65,9 +65,11 @@ header img{
 }
 .card_img{
     height:250px;
-    width:auto;
+    width:100%;
     margin:5px auto 0px auto;
     background-color:#C7BEBE;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 .card_content{
     display : flex;
@@ -95,6 +97,8 @@ header img{
     justify-content: space-between;
     gap:10px;
     background-color: #E7E7E7;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 .inner_left{
     width:50%;

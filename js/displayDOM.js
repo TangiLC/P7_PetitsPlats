@@ -17,7 +17,14 @@ function displayCardDOM(myList){
       }
     }
     cardGrid.innerHTML="";
-    if (myList.length==0){console.log('liste vide')}
+    if (myList.length==0){cardGrid.appendChild(cardDOM(
+          { "id": 0,
+            "name" : "Aucune Recette",
+            "ingredients": [{"ingredient" : "aucune"},{"ingredient" : "recette"},],
+            "time": ":(",
+            "description": "Votre saisie ne permet d'afficher aucune fiche recette. Merci de modifier ou compléter votre recherche",
+            "keywords":["aucun résultat"]
+        }))}
     else {
     for (let i=0; i<myList.length;i++){
         cardGrid.appendChild(cardDOM(myList[i]));
