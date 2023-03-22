@@ -19,7 +19,7 @@ function deleteTag(val,item){
       applianceList.splice(indx,1);}
   if(val=='u'){let indx=ustensilsList.indexOf(item);
       ustensilsList.splice(indx,1);}
-  filterDisplay(recipesList,'recette');
+  filterDisplay(recipesList,'tlc');
 }
 
 function displayCardDOM(myList){

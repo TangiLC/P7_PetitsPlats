@@ -41,8 +41,11 @@ function filterDisplay(myList,val){
 function createKeywordList(list){
 
     for (let i = 0; i < list.length; i++) {
-      let words=['recette'];
+      let words=['tlc'];
       words=words.concat(moreThanThree(list[i].ingredients.map(x => x.ingredient)));
+        for (let j=0;j<list[i].ingredients.length;j++){
+            if (list[i].ingredients[j].hasOwnProperty('unit')){words.push(list[i].ingredients[j].unit)}
+        }
       words=words.concat(moreThanThree(superSplit(list[i].name)));
       words=words.concat(moreThanThree(superSplit(list[i].description)));
       

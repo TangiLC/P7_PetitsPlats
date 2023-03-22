@@ -33,10 +33,10 @@ function isAlphanumeric(str) {
       tagCheck.forEach(function(elem){
         for (let i=0;i<arr.length;i++){
           let tempStr = elem.innerHTML;
-          if (arr[i]=='recette'){arr[i]=''}
-          let Arr=arr[i][0].toUpperCase()+arr[i].substring(1);
-        elem.innerHTML = tempStr.replaceAll(`${arr[i]}`,`<span class='highlight'>${arr[i]}</span>`);
-        tempStr = elem.innerHTML;
-        elem.innerHTML = tempStr.replaceAll(`${Arr}`,`<span class='highlight'>${Arr}</span>`);
-     }})
+          let Arr=arr[i].slice(0,1).toUpperCase()+arr[i].slice(1,);
+          if (arr[i]!='tlc'){
+            elem.innerHTML = tempStr.replaceAll(`${arr[i]}`,`<span class='highlight'>${arr[i]}</span>`);
+            tempStr = elem.innerHTML;
+            elem.innerHTML = tempStr.replaceAll(`${Arr}`,`<span class='highlight'>${Arr}</span>`);
+     }}})
   }
