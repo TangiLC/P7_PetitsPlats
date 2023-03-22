@@ -12,7 +12,11 @@ articleCard.setAttribute("class","card_content");
 
 const cardImg = document.createElement("div");
 cardImg.setAttribute("class","card_img");
-cardImg.textContent=`${cardId} :${keywords}`;
+cardImg.setAttribute("class","card_img");
+let bgcol =(((cardId+30)*3).toString(16).padStart(2,'a')).toString();
+bgcol ="#"+bgcol+bgcol+bgcol;
+cardImg.textContent=`${cardId} ${bgcol}:${keywords}`;
+cardImg.style.backgroundColor=bgcol;
 articleCard.appendChild(cardImg);
 
 const innerTitle = document.createElement("div");

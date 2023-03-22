@@ -4,8 +4,8 @@ const cardGrid= document.getElementById("cardGrid");
 const tagList= document.getElementById("tagList");
 let searchWords =[];
 let recipesList=[];
-let ustensilsList=['couteau'];
-let applianceList=['Four'];
+let ustensilsList=[];
+let applianceList=[];
 let newList=[];
 
 
@@ -41,11 +41,11 @@ function displayCardDOM(myList){
 function filterDisplay(myList,val){
   
   if (val.length>2){
-    let tempSearch=[val];
+    let tempSearch=[val.toLowerCase()];
     datasearch.addEventListener("keydown", function (e) {
        
       if (e.keyCode===13 && datasearch.value.length>2) {
-        searchWords.push(datasearch.value);
+        searchWords.push(datasearch.value.toLowerCase());
         datasearch.removeEventListener("keydown", function(){});
         setTimeout(datasearch.value="",500)
         displayCardDOM(newList);}
