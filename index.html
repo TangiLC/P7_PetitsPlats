@@ -23,11 +23,12 @@
     <form id="recherche" action="" method="get" class="main_form" onsubmit="return false;">
         <div>
             <input type="text" id="datasearch" placeholder="rechercher une recette..." 
-            class="main_input" >
+            class="main_input"  autocomplete="off">
             <i class="magnify fa-solid fa-magnifying-glass"></i>
         </div>
     </form>
-        <div class="flex_row" id="tagList"><!--création des tags--></div>
+        <div class="flex_row" >
+            <div id="recipNb"></div><div id="tagList" class="flex_row"></div> <!--création des tags--></div>
         <div class="flex_row">
             <div id="ingredients" class="flex_row color_s">ingredients <i class="fa-solid fa-angle-down"></i></div>
             <div id="appareils" class="flex_row color_a">appareils <i class="fa-solid fa-angle-down"></i></div>
