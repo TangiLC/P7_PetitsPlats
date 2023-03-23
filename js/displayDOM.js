@@ -6,19 +6,26 @@ const recipNb= document.getElementById("recipNb");
 
 let recipesList=[];
 
-function tagLoop(val,list){
+function tagLoop(sua,list){
   for(let i=0;i<list.length;i++){
-    tagList.appendChild(addTag(val,list[i]));
+    tagList.appendChild(addTag(sua,list[i]));
   }
 }
 
 function deleteTag(val,item){
-  if(val=='s'){let indx=searchWords.indexOf(item);
-      searchWords.splice(indx,1);}
-  if(val=='a'){let indx=applianceList.indexOf(item);
-      applianceList.splice(indx,1);}
-  if(val=='u'){let indx=ustensilsList.indexOf(item);
-      ustensilsList.splice(indx,1);}
+  if(val=='s'){
+      let indx=searchWords.indexOf(item);
+      searchWords.splice(indx,1);
+      }
+  if(val=='a'){
+      let indx=applianceList.indexOf(item);
+      applianceList.splice(indx,1);
+      }
+  if(val=='u'){
+      let indx=ustensilsList.indexOf(item);
+      ustensilsList.splice(indx,1);
+      }
+  closeModal(val); openModal(val);
   filterDisplay(recipesList,'tlc');
 }
 

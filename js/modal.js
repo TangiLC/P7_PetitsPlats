@@ -24,7 +24,8 @@ function createList(sua){
            tempList.push(listFunnel[i].appliance);
           }
     }
-    return myList=[...new Set(tempList)];
+    myList=[...new Set(tempList)];
+    return myList.sort();
 }
 
 function openModal(sua){
@@ -42,24 +43,44 @@ function openModal(sua){
         message="Ajout Appareil";}
     console.log(ListToDisplay);
     target.innerHTML="";
+    target.style.height="450px";
+    document.querySelector(".card_grid").style.top="-390px";
     target.appendChild(createModal(sua,ListToDisplay,message));
-
+    if(sua=='s'){
+        let gridCol=document.querySelector(".modalcontent_s");
+        if (ListToDisplay.length < 15){
+            gridCol.style.gridTemplateColumns='1fr'
+            gridCol.style.width='260px';}
+        if (ListToDisplay.length >= 15 && ListToDisplay.length < 30){
+            gridCol.style.gridTemplateColumns='1fr 1fr'
+            gridCol.style.width='540px';}
+        if (ListToDisplay.length >=30) {gridCol.style.gridTemplateColumns='1fr 1fr 1fr'}
+    }console.log(ListToDisplay.length)
+    
 }
 
 function closeModal(sua){
     let ListToDisplay=createList(sua);
-    if (sua='s'){
-        let message="ingredients <a onclick='openModal('s')'><i class='fa-solid fa-angle-down'></i></a>";
-        document.querySelector('#ingredients').innerHTML=message;
+    let target="";
+    let message="";
+    if (sua=='s'){
+        message="Ingredients <a onclick='openModal(`s`)'><i class='fa-solid fa-angle-down'></i></a>";
+        target=document.querySelector('#ingredients');
         }
-    if (sua='u'){
-        let message="appareils <a onclick='openModal('a')'><i class='fa-solid fa-angle-down'></i></a>";
-        document.querySelector('#ustensiles').innerHTML=message;}
-    if (sua='s'){
-        let message="ustensiles <a onclick='openModal('u')'><i class='fa-solid fa-angle-down'></i><a>";
-        document.querySelector('#appareils').innerHTML=message;}
+    if (sua=='u'){
+        message="Ustensiles <a onclick='openModal(`u`)'><i class='fa-solid fa-angle-down'></i></a>";
+        target=document.querySelector('#ustensiles');
+        }
+    if (sua=='a'){
+        message="Appareils <a onclick='openModal(`a`)'><i class='fa-solid fa-angle-down'></i><a>";
+        target=document.querySelector('#appareils');
+        }
         
     console.log(ListToDisplay);
+    document.querySelector(".card_grid").style.removeProperty("top"); 
+    target.style.removeProperty("height");
+    target.innerHTML=message;
+
 }
 
 /*
