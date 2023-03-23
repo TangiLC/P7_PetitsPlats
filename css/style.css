@@ -55,6 +55,12 @@ header img{
     padding:10px;
 }
 
+.tagList{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap : 20px;
+}
+
 .color_s{
     background-color: #3282F7;
     color:white;
@@ -71,11 +77,20 @@ header img{
     margin-top:5px;
 }
 
-button{
+.tag_button{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:20px;
     font-size: 120%;
-    padding:6px 20px 6px 20px;
-    border-radius: 7px;
+    padding:6px;
+    margin-top:-5px;
+    border-radius: 8px;
     border:none;
+    width:160px;
+    white-space: nowrap; 
+    overflow:hidden;
+    text-overflow: ellipsis;
 }
 
 
@@ -157,7 +172,7 @@ li span{
 }
 
 .modal_row div article{
-    height: 450px;
+    height: 420px;
 }
 .modal_s, .modal_u, .modal_a {
     display:flex;
@@ -174,39 +189,52 @@ li span{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 30px;
-    width:800px;
-    height:400px;
-    overflow:auto;
+    width:720px;
+    height:370px;
+    overflow:scroll;
 }
 
 .modalcontent_a, .modalcontent_u {
     display: grid;
     grid-template-columns: 1fr;
-    width:250px;
-    height:400px;
-    overflow:auto;
+    width:240px;
+    height:370px;
+    overflow:scroll;
 }
 
 .modalcontent_a a,
 .modalcontent_s a,
 .modalcontent_u a{
-    height:22px;
+    height:24px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+    
+.modalcontent_s a:hover{
+    background-color: #074fb9;
+    color:lightgrey;
+    font-size: 115%;
 }
 
-.modalcontent_a a:hover,
-.modalcontent_s a:hover,
 .modalcontent_u a:hover{
+    background-color: #bc2513;
     color:lightgrey;
-    font-size: 125%;
+    font-size: 115%;
+}
+
+.modalcontent_a a:hover{
+    background-color: #29a66c;
+    color:lightgrey;
+    font-size: 115%;
 }
 
 a .fa-solid{
     font-size:98%;
-    transform:translate(0,-2px);
+    transform:translate(0,-1px);
 }
 
 a .fa-solid:hover{
     font-size:105%;
-    transform:translate(-2px,1px) rotate(-180deg);
+    transform:translate(-2px,1px) rotate(-150deg);
 }
     

@@ -2,36 +2,32 @@ const modalS=document.querySelector(".modal_s");
 const modalU=document.querySelector(".modal_u");
 const modalA=document.querySelector(".modal_a");
 
-function createList(sua){
+function createList(sua){                  //création de la liste des keywords des modales      
     let listFunnel=[]
-   if(newList.length==0){
-    listFunnel=recipesList}
+   if(newList.length==0){listFunnel=recipesList}        //initialisation si aucune recherche
     else{listFunnel=newList}
    let myList=[];
    let tempList=[];
    if(sua=='s'){
-     for (let i = 0; i < listFunnel.length; i++) {
-       tempList=tempList.concat(listFunnel[i].ingredients.map(x => x.ingredient));
-       }
+     for (let i = 0; i < listFunnel.length; i++) {      //concat map pour +liste d'objets.key
+       tempList=tempList.concat(listFunnel[i].ingredients.map(x => x.ingredient));}
     }
     if(sua=='u'){
-        for (let i = 0; i < listFunnel.length; i++) {
-           tempList=tempList.concat(listFunnel[i].ustensils);
-          }
+        for (let i = 0; i < listFunnel.length; i++) {   //concat pour +liste d'items
+           tempList=tempList.concat(listFunnel[i].ustensils);}
     }
     if(sua=='a'){
-        for (let i = 0; i < listFunnel.length; i++) {
-           tempList.push(listFunnel[i].appliance);
-          }
+        for (let i = 0; i < listFunnel.length; i++) {   //push pour +item unique
+           tempList.push(listFunnel[i].appliance);}
     }
-    myList=[...new Set(tempList)];
+    myList=[...new Set(tempList)];                      //suppression des doublons
     return myList.sort();
 }
 
-function openModal(sua){
+function openModal(sua){                               //ouverture de la modale
     let ListToDisplay=createList(sua);
-    let message="";
-    let target="";
+    let message="";                                    //phrase de titre
+    let target="";                                     //élément cible du DOM
     if (sua=='s'){
         target=document.querySelector('#ingredients');
         message="Rechercher un ingrédient";}
@@ -41,49 +37,47 @@ function openModal(sua){
     if (sua=='a'){
         target=document.querySelector('#appareils');
         message="Ajout Appareil";}
-    console.log(ListToDisplay);
     target.innerHTML="";
-    target.style.height="450px";
-    document.querySelector(".card_grid").style.top="-390px";
+    target.style.height="425px";                       //agrandissement du cadre position relatif
+    document.querySelector(".card_grid").style.top="-395px";    //déplacement des éléments zindex<
     target.appendChild(createModal(sua,ListToDisplay,message));
     if(sua=='s'){
         let gridCol=document.querySelector(".modalcontent_s");
-        if (ListToDisplay.length < 15){
-            gridCol.style.gridTemplateColumns='1fr'
-            gridCol.style.width='260px';}
+        if (ListToDisplay.length < 15){                         //ajustement largeur de la modale ingrédients
+            gridCol.style.gridTemplateColumns='1fr';            //selon le nb d'ingrédients à afficher
+            gridCol.style.width='240px';}
         if (ListToDisplay.length >= 15 && ListToDisplay.length < 30){
-            gridCol.style.gridTemplateColumns='1fr 1fr'
-            gridCol.style.width='540px';}
+            gridCol.style.gridTemplateColumns='1fr 1fr';
+            gridCol.style.width='480px';}
         if (ListToDisplay.length >=30) {gridCol.style.gridTemplateColumns='1fr 1fr 1fr'}
-    }console.log(ListToDisplay.length)
-    
+    }console.log(ListToDisplay.length);
 }
 
-function closeModal(sua){
+function closeModal(sua){                     //fermeture modale. Retour à l'état initial
     let ListToDisplay=createList(sua);
-    let target="";
+    let target="";                            //élément du DOM
     let message="";
+    let ingred =document.querySelector('#ingredients');
+    let ustens =document.querySelector('#ustensiles');
+    let appare =document.querySelector('#appareils');
     if (sua=='s'){
         message="Ingredients <a onclick='openModal(`s`)'><i class='fa-solid fa-angle-down'></i></a>";
-        target=document.querySelector('#ingredients');
+        target=ingred;
         }
     if (sua=='u'){
         message="Ustensiles <a onclick='openModal(`u`)'><i class='fa-solid fa-angle-down'></i></a>";
-        target=document.querySelector('#ustensiles');
+        target=ustens;
         }
     if (sua=='a'){
         message="Appareils <a onclick='openModal(`a`)'><i class='fa-solid fa-angle-down'></i><a>";
-        target=document.querySelector('#appareils');
+        target=appare;
         }
-        
-    console.log(ListToDisplay);
-    document.querySelector(".card_grid").style.removeProperty("top"); 
     target.style.removeProperty("height");
-    target.innerHTML=message;
-
+    console.log(appare.style.height,ustens.style.height,ingred.style.height)
+    if (appare.style.height==''&&
+        ustens.style.height==''&&
+        ingred.style.height==''){    
+        document.querySelector(".card_grid").style.removeProperty("top");}                           
+    target.innerHTML=message;                                         //retour au titre initial
 }
 
-/*
-
-
-*/

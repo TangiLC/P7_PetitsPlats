@@ -4,9 +4,9 @@
         "name" : "Limonade de Coco",
         "servings" : 1,
         "ingredients": [
-            {"ingredient" : "Lait de coco","quantity" : 400,"unit" : "ml"},
-            {"ingredient" : "Jus de citron","quantity" : 2},
-            {"ingredient" : "Crème de coco","quantity" : 2,"unit" : "cuillères à soupe"},
+            {"ingredient" : "Lait de Coco","quantity" : 400,"unit" : "ml"},
+            {"ingredient" : "Jus de Citron","quantity" : 2},
+            {"ingredient" : "Crème de Coco","quantity" : 2,"unit" : "cuillères à soupe"},
             {"ingredient" : "Sucre","quantity" : 30,"unit" : "grammes"},
             {"ingredient": "Glaçons"}
         ],
@@ -61,7 +61,7 @@
                 "quantity" : 1          
             },
             {
-                "ingredient": "Lait de coco",
+                "ingredient": "Lait de Coco",
                 "quantity" : 400,
                 "unit" : "ml"
             },
@@ -150,7 +150,7 @@
                "unit": "cuillères à soupe"
            },
            {
-               "ingredient": "gruyère râpé",
+               "ingredient": "Gruyère râpé",
                "quantity": 100,
                "unit": "grammes"
            },
@@ -175,7 +175,7 @@
                 "quantity": 1
             },
             {
-                "ingredient": "Pomme",
+                "ingredient": "Pommes",
                 "quantity": 3
             },
             {
@@ -266,7 +266,7 @@
                "unit": "grammes"
            },
            {
-                "ingredient": "farine",
+                "ingredient": "Farine",
                 "quantity": 90,
                 "unit": "grammes"
            }
@@ -437,7 +437,7 @@
                 "unit":"cuillère à soupe"
             },
             {
-                "ingredient": "huile d'olive",
+                "ingredient": "Huile d'olive",
                 "quantity": 2,
                 "unit": "cuillère à soupe"
             }
@@ -552,7 +552,7 @@
                 "unit":"tiges"
             },
             {
-                "ingredient": "huile d'olives",
+                "ingredient": "Huile d'olive",
                 "quantity": 2,
                 "unit": "cuillère à soupe"
             }
@@ -577,7 +577,7 @@
                 "quantity": 0.5
             },
             {
-                "ingredient": "Jus de citron",
+                "ingredient": "Jus de Citron",
                 "quantity": 1,
                 "unit":"cuillères à soupe"
             },
@@ -678,7 +678,7 @@
                 "unit":"grammes"
             },
             {
-                "ingredient": "huile d'olive",
+                "ingredient": "Huile d'olive",
                 "quantity": 1,
                 "unit": "cuillères à soupe"
             }
@@ -891,7 +891,7 @@
                 "quantity": 1
             },
             {
-                "ingredient": "Huile d'olives"
+                "ingredient": "Huile d'olive"
             },
             {
                 "ingredient": "Oignon",
@@ -1052,7 +1052,7 @@
                 "unit": "grammes"
             },
             {
-                "ingredient": "Petits poids",
+                "ingredient": "Petits pois",
                 "quantity": 100,
                 "unit":"grammes"
             },
@@ -1133,7 +1133,7 @@
                 "unit":"cuillères à soupe"
             },
             {
-                "ingredient": "Jus de citron",
+                "ingredient": "Jus de Citron",
                 "quantity": 1,
                 "unit": "cuillères à soupe"
             }
@@ -1264,7 +1264,7 @@
                 "unit": "grammes"
             },
             {
-                "ingredient": "Huile d'olives",
+                "ingredient": "Huile d'olive",
                 "quantity": 25,
                 "unit": "cl"
             },
@@ -1273,7 +1273,7 @@
                 "quantity": 1
             },
             {
-                "ingredient": "Coulis de tomates",
+                "ingredient": "Coulis de tomate",
                 "quantity": 20,
                 "unit": "cl"
             },
@@ -1325,7 +1325,7 @@
         "servings": 40,
         "ingredients": [
             {
-                "ingredient": "Pomme",
+                "ingredient": "Pommes",
                 "quantity": 2
             },
             {
@@ -1364,7 +1364,7 @@
                 "quantity": 3
             },
             {
-                "ingredient": "Sucre en poudre",
+                "ingredient": "Sucre en Poudre",
                 "quantity": 4,
                 "unit":"cuillères à café"
             },
@@ -1492,7 +1492,7 @@
                 "unit":"grammes"
             },
             {
-                "ingredient": "farine",
+                "ingredient": "Farine",
                 "quantity": 40,
                 "unit": "grammes"
             }
@@ -1578,7 +1578,7 @@
         "servings": 6,
         "ingredients": [
             {
-                "ingredient": "Jus de citron",
+                "ingredient": "Jus de Citron",
                 "quantity": 100,
                 "unit": "grammes"
             },
@@ -1644,11 +1644,11 @@
         "servings": 4,
         "ingredients": [
             {
-                "ingredient": "Bananes",
+                "ingredient": "Banane",
                 "quantity": 2
             },
             {
-                "ingredient": "Kiwis",
+                "ingredient": "Kiwi",
                 "quantity": 3
             },
             {
@@ -1686,7 +1686,7 @@
                 "quantity": 6
             },
             {
-                "ingredient": "Poudre d'amendes",
+                "ingredient": "Poudre d'amandes",
                 "quantity": 500,
                 "unit": "grammes"
             },

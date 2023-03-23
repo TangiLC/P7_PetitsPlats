@@ -1,26 +1,3 @@
-function addTag(clas,val){
-    const tagButton = document.createElement("button");
-    tagButton.setAttribute("onclick",`deleteTag('${clas}','${val}')`);
-    tagButton.setAttribute("class",`color_${clas} button_${val}`);
-    tagButton.innerHTML=`${val}&nbsp;<i class="fa-solid fa-circle-xmark"></i>`;
-return tagButton;
-}
-
-function addTagOnclick(sua,mystring){
-    const tagList= document.getElementById("tagList");
-    tagList.appendChild(addTag(sua,mystring));
-    if(sua=='s'){
-        searchWords.push(mystring.toLowerCase())};
-    if(sua=='u'){
-        ustensilsList.push(mystring)};
-    if(sua=='a'){
-        applianceList.push(mystring)};
-    filterDisplay(recipesList,'tlc');
-    closeModal(sua);
-    openModal(sua);
-}
-
-
 function createModal(sua,list,mssge){
     
     const modal=document.createElement('article');

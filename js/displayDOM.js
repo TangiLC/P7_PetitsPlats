@@ -1,4 +1,3 @@
-
 const mainForm=document.querySelector(".main_form");
 const cardGrid= document.getElementById("cardGrid"); 
 const tagList= document.getElementById("tagList");
@@ -6,13 +5,14 @@ const recipNb= document.getElementById("recipNb");
 
 let recipesList=[];
 
-function tagLoop(sua,list){
+function tagLoop(sua,list){           //boucle de création de tous les tags
   for(let i=0;i<list.length;i++){
     tagList.appendChild(addTag(sua,list[i]));
   }
 }
 
-function deleteTag(val,item){
+
+function deleteTag(val,item){           //suppression du keyword dans la liste
   if(val=='s'){
       let indx=searchWords.indexOf(item);
       searchWords.splice(indx,1);
@@ -25,31 +25,29 @@ function deleteTag(val,item){
       let indx=ustensilsList.indexOf(item);
       ustensilsList.splice(indx,1);
       }
-  closeModal(val); openModal(val);
-  filterDisplay(recipesList,'tlc');
+  ['s','u','a'].forEach((e) => closeModal(e));
+  filterDisplay(recipesList,'tlc');            //reset de l'affichage
 }
 
 function displayCardDOM(myList){
-    
-    tagList.innerHTML="";
-    //recipNb.innerHTML="";
+    tagList.innerHTML="";                      //remise à zéro de l'écran
+
     tagLoop('s',searchWords);
     tagLoop('a',applianceList);
     tagLoop('u',ustensilsList);
     
-    cardGrid.innerHTML="";
-    if (myList.length==0){recipNb.innerText="Votre recherche ne permet pas de vous proposer de recette, merci de modifier les critères.";
+    cardGrid.innerHTML="";                     //création de la card Zéro recette
+    if (myList.length==0){recipNb.innerText="Aucune recette ne correspond à votre critère.";
       cardGrid.appendChild(cardDOM(
-          { "id": 33,
-            "name" : "Aucune Recette",
+          { "id": 33, "name" : "Aucune Recette",
             "ingredients": [{"ingredient" : "aucune"},{"ingredient" : "recette"},],
             "time": ":(",
-            "description": "Votre saisie ne permet d'afficher aucune fiche recette. Merci de modifier ou compléter votre recherche",
+            "description": "Votre saisie ne permet d'afficher aucune fiche recette. Vous pouvez chercher ⟪ tarte aux pommes ⟫, ⟪ poisson ⟫, etc",
             "keywords":["aucun résultat"]
         }))}
-    else {
-    for (let i=0; i<myList.length;i++){
-      recipNb.innerText=`Nous avons ${myList.length} recette(s) à vous proposer`;
+    else {let a=myList.length;
+    for (let i=0; i<a;i++){
+      recipNb.innerText=`Nous avons ${a} recette${a==1?'':'s'} à vous proposer`;
       cardGrid.appendChild(cardDOM(myList[i]));
 
         }
@@ -57,7 +55,7 @@ function displayCardDOM(myList){
 }
 
 
-fetch('./data/recipes.json')
+fetch('./data/recipes.json')                          //récupération asynchrone du json
   .then(function (recipes) {
     if (recipes.status !== 200) {
       console.log('Problem. Status Code: ' + recipes.status);
@@ -65,9 +63,10 @@ fetch('./data/recipes.json')
     }
 
     recipes.json().then(function (list) {  
-        recipesList=createKeywordList(list);
-        datasearch.addEventListener('input',function() {filterDisplay(recipesList,datasearch.value)})
-        
+        recipesList=createKeywordList(list);          //lancement de la création des keywords dans le json
+        datasearch.addEventListener('input',function() {
+          filterDisplay(recipesList,datasearch.value)})     //écoute de la saisie utilisateur
+
         }) 
     })
   
