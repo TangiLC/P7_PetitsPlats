@@ -134,3 +134,36 @@ li span{
     padding:0px 5px 10px 10px;
     margin-top:10px;
 }
+
+.modal_s, .modal_u, .modal_a {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.modalcontent_s {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 30px;
+    width:800px;
+    height:12em;
+    overflow:auto;
+}
+
+.modalcontent_a, .modalcontent_u {
+    display: grid;
+    grid-template-columns: 1fr;
+    width:250px;
+    height:12em;
+    overflow:auto;
+}
+a .fa-solid{
+    font-size:98%;
+    transform:translate(0,-2px);
+}
+
+a .fa-solid:hover{
+    font-size:105%;
+    transform:translate(-2px,1px) rotate(-180deg);
+}
+    

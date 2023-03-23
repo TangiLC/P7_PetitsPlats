@@ -56,11 +56,3 @@ return articleCard;
 }
 
 
-function addTag(clas,val){
-    const tagButton = document.createElement("button");
-    tagButton.setAttribute("onclick",`deleteTag('${clas}','${val}')`);
-    tagButton.setAttribute("class",`color_${clas} button_${val}`);
-    tagButton.innerHTML=`${val}&nbsp;<i class="fa-solid fa-circle-xmark"></i>`;
-return tagButton;
-}
-

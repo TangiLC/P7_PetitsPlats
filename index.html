@@ -31,12 +31,12 @@
             <div id="recipNb">Merci d'entrer un mot-clé pour la recherche</div>
             <div id="tagList" class="flex_row"></div> <!--création des tags--></div>
         <div class="flex_row">
-            <a onclick="openModal('s')">
-            <div id="ingredients" class="flex_row color_s modal_s">ingredients <i class="fa-solid fa-angle-down"></i></div></a>
-            <a onclick="openModal('a')">
-            <div id="appareils" class="flex_row color_a modal_a">appareils <i class="fa-solid fa-angle-down"></i></div></a>
-            <a onclick="openModal('u')">
-            <div id="ustensiles" class="flex_row color_u modal_u">ustensiles <i class="fa-solid fa-angle-down"></i></div></a>
+            <div id="ingredients" class="color_s modal_s">ingredients
+                <a onclick="openModal('s')"><i class="fa-solid fa-angle-down"></i></a></div>
+            <div id="appareils" class="color_a modal_a">appareils 
+                <a onclick="openModal('a')"><i class="fa-solid fa-angle-down"></i></a></div>
+            <div id="ustensiles" class="color_u modal_u">ustensiles
+                <a onclick="openModal('u')"><i class="fa-solid fa-angle-down"></i></a></div>
         </div>
     
 <div><br></div>
@@ -48,6 +48,7 @@
 </main>
 
 <script src="./js/factory/cardDOM_factory.js"></script>
+<script src="./js/factory/modal_factory.js"></script>
 <script src="./js/utils.js"></script>
 <script src="./js/modal.js"></script>
 <script src="./js/keywordSearch.js"></script>

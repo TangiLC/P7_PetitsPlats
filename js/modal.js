@@ -29,5 +29,40 @@ function createList(sua){
 
 function openModal(sua){
     let ListToDisplay=createList(sua);
+    let message="";
+    let target="";
+    if (sua=='s'){
+        target=document.querySelector('#ingredients');
+        message="Rechercher un ingrédient";}
+    if (sua=='u'){
+        target=document.querySelector('#ustensiles');
+        message="Ajout Ustensile";}
+    if (sua=='a'){
+        target=document.querySelector('#appareils');
+        message="Ajout Appareil";}
+    console.log(ListToDisplay);
+    target.innerHTML="";
+    target.appendChild(createModal(sua,ListToDisplay,message));
+
+}
+
+function closeModal(sua){
+    let ListToDisplay=createList(sua);
+    if (sua='s'){
+        let message="ingredients <a onclick='openModal('s')'><i class='fa-solid fa-angle-down'></i></a>";
+        document.querySelector('#ingredients').innerHTML=message;
+        }
+    if (sua='u'){
+        let message="appareils <a onclick='openModal('a')'><i class='fa-solid fa-angle-down'></i></a>";
+        document.querySelector('#ustensiles').innerHTML=message;}
+    if (sua='s'){
+        let message="ustensiles <a onclick='openModal('u')'><i class='fa-solid fa-angle-down'></i><a>";
+        document.querySelector('#appareils').innerHTML=message;}
+        
     console.log(ListToDisplay);
 }
+
+/*
+
+
+*/
