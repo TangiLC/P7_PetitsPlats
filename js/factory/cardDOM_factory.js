@@ -5,17 +5,20 @@ let cardTime=elem.time;
 let cardIngredients=elem.ingredients;
 let cardDescription=elem.description;
 let keywords=elem.keywords;
+let bgImg =elem.artwork[0]; 
+let bgcoltype = elem.artwork[1]; 
+let mainImg=elem.artwork[2];
 let ingredInnerHTML="";
+
+
 
 const articleCard = document.createElement("article");
 articleCard.setAttribute("class","card_content");
 
 const cardImg = document.createElement("div");
-cardImg.setAttribute("class","card_img");
-let bgcol =(((cardId+30)*3).toString(16).padStart(2,'a')).toString();
-bgcol ="#"+bgcol+bgcol+'cc';
-cardImg.textContent=`${cardId} ${bgcol}:${keywords}`;
-cardImg.style.backgroundColor=bgcol;
+cardImg.setAttribute("class",`card_img bg${bgcoltype}`);
+cardImg.style.backgroundImage="url('./data/images/"+bgImg+"')";
+cardImg.innerHTML=`<img src='./data/images/${mainImg}' height='200px' width='200px'>`;
 articleCard.appendChild(cardImg);
 
 const innerTitle = document.createElement("div");

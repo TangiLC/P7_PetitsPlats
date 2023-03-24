@@ -43,7 +43,8 @@ function displayCardDOM(myList){
             "ingredients": [{"ingredient" : "aucune"},{"ingredient" : "recette"},],
             "time": ":(",
             "description": "Votre saisie ne permet d'afficher aucune fiche recette. Vous pouvez chercher ⟪ tarte aux pommes ⟫, ⟪ poisson ⟫, etc",
-            "keywords":["aucun résultat"]
+            "keywords":["aucun résultat"],
+            "artwork":["None.png","soup","None.svg"]
         }))}
     else {let a=myList.length;
     for (let i=0; i<a;i++){

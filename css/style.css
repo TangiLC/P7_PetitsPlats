@@ -103,13 +103,27 @@ header img{
     top:30px;
     z-index: 1;
 }
+.bgdrink{background-color:#6FA7F9;}
+.bgsalad{background-color:#95E4B7;}
+.bgmain{background-color: #FBE0DD;}
+.bgdesert{background-color:#D6E6F6;}
+.bgsoup{background-color: #F29287;}
+
 .card_img{
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
     height:250px;
     width:100%;
     margin:5px auto 0px auto;
-    background-color:#C7BEBE;
+    /*background-color:#C7BEBE;*/
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+}
+
+.card_img img{
+
 }
 .card_content{
     display : flex;
@@ -235,6 +249,6 @@ a .fa-solid{
 
 a .fa-solid:hover{
     font-size:105%;
-    transform:translate(-2px,1px) rotate(-150deg);
+    transform:translate(-2px,1px) rotate(-170deg);
 }
     
