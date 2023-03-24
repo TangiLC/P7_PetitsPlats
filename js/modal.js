@@ -2,6 +2,19 @@ const modalS=document.querySelector(".modal_s");
 const modalU=document.querySelector(".modal_u");
 const modalA=document.querySelector(".modal_a");
 
+function verifDouble(tlist,in_us_apList){    //vérif entre liste entrées utilisateur et tags
+  for (let j=0;j<searchWords.length;j++){
+    let indx=tlist.indexOf(searchWords[j]);
+    if (indx!=-1){
+      console.log('trouvé',searchWords[j],indx);
+      in_us_apList.push(searchWords[j]);
+      searchWords.splice(j,1);
+      tlist.splice(indx,1);
+      filterDisplay(newList,'tlc');
+  }}
+  return tlist;
+}
+
 function createList(sua){                  //création de la liste des keywords des modales      
     let listFunnel=[]
    if(newList.length==0){listFunnel=recipesList}        //initialisation si aucune recherche
@@ -11,14 +24,17 @@ function createList(sua){                  //création de la liste des keywords 
    if(sua=='s'){
      for (let i = 0; i < listFunnel.length; i++) {      //concat map pour +liste d'objets.key
        tempList=tempList.concat(listFunnel[i].ingredients.map(x => x.ingredient));}
+       tempList= verifDouble(tempList,searchWords);
     }
     if(sua=='u'){
         for (let i = 0; i < listFunnel.length; i++) {   //concat pour +liste d'items
            tempList=tempList.concat(listFunnel[i].ustensils);}
+           tempList= verifDouble(tempList,ustensilsList);
     }
     if(sua=='a'){
         for (let i = 0; i < listFunnel.length; i++) {   //push pour +item unique
            tempList.push(listFunnel[i].appliance);}
+           tempList= verifDouble(tempList,applianceList);
     }
     myList=[...new Set(tempList)];                      //suppression des doublons
     return myList.sort();
