@@ -37,7 +37,7 @@ function displayCardDOM(myList){
     tagLoop('u',ustensilsList);
     
     cardGrid.innerHTML="";                     //création de la card Zéro recette
-    if (myList.length==0){recipNb.innerText="Aucune recette ne correspond à votre critère.";
+    if (myList.length==0){recipNb.innerText="Aucune recette à proposer.";
       cardGrid.appendChild(cardDOM(
           { "id": 33, "name" : "Aucune Recette",
             "ingredients": [{"ingredient" : "aucune"},{"ingredient" : "recette"},],

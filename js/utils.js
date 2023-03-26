@@ -48,7 +48,7 @@ function addTag (clas, val) {                 //création du DOM des tags de rec
   const tagButton = document.createElement('a');
   tagButton.setAttribute('onclick', `deleteTag('${clas}','${val}')`);
   tagButton.setAttribute('class', `color_${clas} tag_button`);
-  tagButton.innerHTML = `${val.slice(0,14)}${val.length>14?'...':''}<i class="fa-regular fa-circle-xmark"></i>`;
+  tagButton.innerHTML = `<p>${val.slice(0,14)}${val.length>14?'...':''}</p><i class="fa-regular fa-circle-xmark"></i>`;
   return tagButton;
 }
 
