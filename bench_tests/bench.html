@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>Les Petits Plats</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/f69658589d.js" crossorigin="anonymous"></script>
+
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+</head>
+<body>
+<header>
+    <img src="logo.png" alt="site de recherche de recettes Les Petits Plats">
+</header>
+<main>
+    <form id="recherche" action="" method="get" class="main_form" onsubmit="return false;">
+        <div>
+            <input type="text" id="datasearch" placeholder="rechercher une recette..." 
+            class="main_input"  autocomplete="off">
+            <a onclick="clickInput()"><i class="magnify fa-solid fa-magnifying-glass"></i></a>
+        </div>
+    </form>
+    
+        <div class="flex_row" >
+            <div id="recipNb">Merci d'entrer un mot-clé pour la recherche</div>
+            <div id="tagList" class="tagList"> <!--création des tags--></div></div>
+            
+        <div class="modal_row">
+            <div id="ingredients" class="color_s modal_s">Ingredients
+                <a onclick="openModal('s')"><i class="fa-solid fa-angle-down"></i></a></div>
+            <div id="appareils" class="color_a modal_a">Appareils 
+                <a onclick="openModal('a')"><i class="fa-solid fa-angle-down"></i></a></div>
+            <div id="ustensiles" class="color_u modal_u">Ustensiles
+                <a onclick="openModal('u')"><i class="fa-solid fa-angle-down"></i></a></div>
+        </div>
+        <div class="card_grid" id="cardGrid">   <!--création des cards par scripts--></div>
+<div><br></div>
+
+
+</main>
+
+<script src="bench.js"></script>
+</body>
+</html>
