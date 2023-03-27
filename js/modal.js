@@ -24,6 +24,7 @@ function createList(sua){                  //création de la liste des keywords 
      for (let i = 0; i < listFunnel.length; i++) {      //concat map pour +liste d'objets.key
        tempList=tempList.concat(listFunnel[i].ingredients.map(x => x.ingredient));}
        tempList= verifDouble(tempList,searchWords);
+       tempList= tempList.filter(ingredient => ingredient.toLowerCase().includes(datasearch.value));
     }
     if(sua=='u'){
         for (let i = 0; i < listFunnel.length; i++) {   //concat pour +liste d'items
@@ -45,7 +46,7 @@ function openModal(sua){                               //ouverture de la modale
     let target="";                                     //élément cible du DOM
     if (sua=='s'){
         target=document.querySelector('#ingredients');
-        message="Rechercher un ingrédient";}
+        message="Rechercher :"+datasearch.value;}
     if (sua=='u'){
         target=document.querySelector('#ustensiles');
         message="Ajout Ustensile";}
