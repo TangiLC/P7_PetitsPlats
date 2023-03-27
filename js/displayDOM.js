@@ -26,7 +26,7 @@ function deleteTag(val,item){           //suppression du keyword dans la liste
       ustensilsList.splice(indx,1);
       }
   ['s','u','a'].forEach((e) => closeModal(e));
-  filterDisplay(recipesList,'tlc');            //reset de l'affichage
+  filterDisplay(recipesList,'...');            //reset de l'affichage
 }
 
 function displayCardDOM(myList){
@@ -44,7 +44,7 @@ function displayCardDOM(myList){
             "ingredients": [{"ingredient" : "aucune"},{"ingredient" : "recette"},],
             "time": ":(",
             "description": "Votre saisie ne permet d'afficher aucune fiche recette. Vous pouvez chercher ⟪ tarte aux pommes ⟫, ⟪ poisson ⟫, etc",
-            "keywords":["aucun résultat"],
+            //"keywords":["aucun résultat"],
             "artwork":["None.png","soup","None.svg"]
         }))}
     else {let a=myList.length;
@@ -65,7 +65,7 @@ fetch('./data/recipes.json')                          //récupération asynchron
     }
 
     recipes.json().then(function (list) {  
-        recipesList=createKeywordList(list);          //lancement de la création des keywords dans le json
+        recipesList=list;          
         datasearch.addEventListener('input',function() {
           filterDisplay(recipesList,datasearch.value)})     //écoute de la saisie utilisateur
 

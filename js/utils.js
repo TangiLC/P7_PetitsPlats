@@ -2,7 +2,7 @@ function isAlphanumeric (str) {        //regex des mots valides de keywords
   return /^[a-zÀ-ÿ-()%/ ]+$/.test(str);
 }
 
-function isSmallWord (str) {           //liste des mots de+3 lettres à exclure de keywords
+/*function isSmallWord (str) {           //liste des mots de+3 lettres à exclure de keywords
   let testArray = ['une','les','que','aux','peu','des','sur','pas','est','vos','pour','tout',
     'faire','avant','avec','ainsi','vous','par','puis','plus','votre','dans','elle','aussi','après']
   return testArray.includes(str.slice(1));
@@ -22,12 +22,11 @@ function moreThanThree (myList) {    //suppression des mots de moins de 3 lettre
   return returnedList;
 }
 
-
 function superSplit (str) {               //récupère les mots de description en liste sans (".,-')
   let ssplit = str.split('(').join(',').split(')').join(',').split(' ').join(',')
         .split('.').join(',').split("'").join(',').split('-').join(',').split(',');
   return ssplit;
-}
+}*/
 
 function highlight (arr) {                     //ajoute un <span> pour mettre en évidence le mot
   const tagCheck = document.querySelectorAll('.tag_check');
@@ -64,7 +63,7 @@ function addTagOnclick (sua, mystring) {      //création des tags de recherche 
   if (sua == 'a') {
     applianceList.push(mystring);
     applianceList=[...new Set(applianceList)]}
-  filterDisplay(recipesList, 'tlc');
+  filterDisplay(recipesList, '...');
   ;['s', 'u', 'a'].forEach(el => closeModal(el));  //closeModal permet la mise à jour de la liste des keywords
   openModal(sua);
 }

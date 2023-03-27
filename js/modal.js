@@ -6,11 +6,10 @@ function verifDouble(tlist,in_us_apList){    //vérif entre liste entrées utili
   for (let j=0;j<searchWords.length;j++){
     let indx=tlist.indexOf(searchWords[j]);
     if (indx!=-1){
-      console.log('trouvé',searchWords[j],indx);
       in_us_apList.push(searchWords[j]);
       searchWords.splice(j,1);
       tlist.splice(indx,1);
-      filterDisplay(newList,'tlc');
+      filterDisplay(newList,'...');
   }}
   return tlist;
 }
@@ -66,7 +65,7 @@ function openModal(sua){                               //ouverture de la modale
             gridCol.style.gridTemplateColumns='1fr 1fr';
             gridCol.style.width='480px';}
         if (ListToDisplay.length >=30) {gridCol.style.gridTemplateColumns='1fr 1fr 1fr'}
-    }console.log(ListToDisplay.length);
+    }
 }
 
 function closeModal(sua){                     //fermeture modale. Retour à l'état initial
