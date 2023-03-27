@@ -32,6 +32,7 @@ function filterDisplay (myList, val) {
     datasearch.addEventListener('keydown', function (e) {
       if (e.keyCode === 13 && datasearch.value.length > 2) {
         addTagInList();
+        closeModal('s');
       }
     })
     fusionList(myList,tempSearch);
