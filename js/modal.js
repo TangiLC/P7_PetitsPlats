@@ -62,10 +62,12 @@ function openModal(sua){                               //ouverture de la modale
         let gridCol=document.querySelector(".modalcontent_s");
         if (ListToDisplay.length < 15){                         //ajustement largeur de la modale ingrédients
             gridCol.style.gridTemplateColumns='1fr';            //selon le nb d'ingrédients à afficher
-            gridCol.style.width='240px';}
+            gridCol.style.width='240px'; 
+            gridCol.parentElement.style.height='240px';}
         if (ListToDisplay.length >= 15 && ListToDisplay.length < 30){
             gridCol.style.gridTemplateColumns='1fr 1fr';
-            gridCol.style.width='480px';}
+            gridCol.style.width='480px'; 
+            gridCol.parentElement.style.height='340px';}
         if (ListToDisplay.length >=30) {gridCol.style.gridTemplateColumns='1fr 1fr 1fr'}
     }console.log(ListToDisplay.length);
 }

@@ -21,8 +21,8 @@ function cardDOM(elem){
     
     const cardImg = document.createElement("div");
     cardImg.setAttribute("class",`card_img bg${bgcoltype}`);
-    cardImg.style.backgroundImage="url('./data/images/"+bgImg+"')";
-    cardImg.innerHTML=`<img src='./data/images/${mainImg}' height='200px' width='200px'>`;
+    cardImg.style.backgroundImage="url('../data/images/"+bgImg+"')";
+    cardImg.innerHTML=`<img src='../data/images/${mainImg}' height='200px' width='200px'>`;
     articleCard.appendChild(cardImg);
     
     const innerTitle = document.createElement("div");
@@ -125,7 +125,7 @@ function isAlphanumeric (str) {
   
   
   function superSplit (str) {               
-    let ssplit = str.split('(').join(',').split(')').join(',').split(' ').join(',')
+    let ssplit = str.toLowerCase().split('(').join(',').split(')').join(',').split(' ').join(',')
           .split('.').join(',').split("'").join(',').split('-').join(',').split(',');
     return ssplit;
   }
@@ -182,7 +182,6 @@ function verifDouble(tlist,in_us_apList){
   for (let j=0;j<searchWords.length;j++){
     let indx=tlist.indexOf(searchWords[j]);
     if (indx!=-1){
-      console.log('trouvé',searchWords[j],indx);
       in_us_apList.push(searchWords[j]);
       searchWords.splice(j,1);
       tlist.splice(indx,1);
@@ -201,7 +200,7 @@ function createList(sua){
      for (let i = 0; i < listFunnel.length; i++) {      
        tempList=tempList.concat(listFunnel[i].ingredients.map(x => x.ingredient));}
        tempList= verifDouble(tempList,searchWords);
-       tempList= tempList.filter(ingredient => ingredient.toLowerCase().includes(datasearchvalue));
+       tempList= tempList.filter(ingredient => ingredient.toLowerCase().includes(datasearch.value));
     }
     if(sua=='u'){
         for (let i = 0; i < listFunnel.length; i++) {   
@@ -223,7 +222,7 @@ function openModal(sua){
     let target="";                                     
     if (sua=='s'){
         target=document.querySelector('#ingredients');
-        message="Rechercher :"+datasearchvalue;}
+        message="Rechercher :"+datasearch.value;}
     if (sua=='u'){
         target=document.querySelector('#ustensiles');
         message="Ajout Ustensile";}
@@ -266,7 +265,7 @@ function closeModal(sua){
         target=appare;
         }
     target.style.removeProperty("height");
-    console.log(appare.style.height,ustens.style.height,ingred.style.height)
+    
     if (appare.style.height==''&&
         ustens.style.height==''&&
         ingred.style.height==''){    
@@ -286,19 +285,19 @@ let newList = []            //liste (json) des recettes triées
 let highArray = []          //liste des mots-clés à mettre en évidence
 
 function clickInput(){      //simuler la touche entrée lors du click
-  if (datasearchvalue.length > 2){
+  if (datasearch.value.length > 2){
     addTagInList();}
-  fusionList(recipesList,datasearchvalue)
+  fusionList(recipesList,datasearch.value)
   displayCardDOM(newList)              
   highlight(highArray)
 }
 
 function addTagInList(){
-  searchWords.push(datasearchvalue.toLowerCase());
+  searchWords.push(datasearch.value.toLowerCase());
   searchWords=[...new Set(searchWords)];           
   
   datasearch.placeholder = 'affiner la recherche';
-  setTimeout((datasearchvalue = ''), 500);
+  setTimeout((datasearch.value = ''), 500);
   displayCardDOM(newList);
   highlight(highArray);
 }
@@ -309,7 +308,7 @@ function filterDisplay (myList, val) {
     let tempSearch = [val.toLowerCase()]
 
     datasearch.addEventListener('keydown', function (e) {
-      if (e.keyCode === 13 && datasearchvalue.length > 2) {
+      if (e.keyCode === 13 && datasearch.value.length > 2) {
         addTagInList();
         closeModal('s');
       }
@@ -341,34 +340,58 @@ function createKeywordList (list) {
   return list
 }
 
-/*function fusionList(myList,tempSearch){    //CETTE FONCTION POUR L'ALGO 1 ################################
-tempSearch = [...tempSearch, ...ustensilsList, ...applianceList, ...searchWords]; 
-    console.log(tempSearch);
-highArray = tempSearch               
-                                         
-newList = myList.filter(recip =>     
-    tempSearch.every(key =>            
-        recip.ingredients.map(x=>x.ingredient).some(ingredient => ingredient.toLowerCase().includes(key)) ||
-        recip.name.split(' ').some(rName => rName.toLowerCase().includes(key)) ||
-        recip.description.split(' ').some(descr => descr.toLowerCase().includes(key)) ||
-        recip.appliance.includes(key) ||
-        recip.ustensils.some(keyword => keyword.includes(key))
-      ))
-    }*/
+function fusionList(myList,tempSearch){    //CETTE FONCTION POUR L'ALGO 1 #########################
+tempSearch = [...tempSearch, ...ustensilsList, ...applianceList, ...searchWords];              //##
+                                                                                               //##
+highArray = tempSearch                                                                         //##        
+newList =[];                                                                                   //##
+let listWords=[];
+let Nbcalc=0;
+for (let i=0;i<myList.length;i++){
+   listWords=[];
+   listWords[0] = myList[i].appliance;
+   let listDescript = superSplit(myList[i].description);
+   let listName = superSplit(myList[i].name);
+   
+   for (let j=0; j<myList[i].ustensils.length;j++){
+     listWords.push(myList[i].ustensils[j]);}
+   
+   for (let j=0; j<myList[i].ingredients.length;j++){
+      if (myList[i].ingredients[j].hasOwnProperty('ingredient')) {
+        let ingred=myList[i].ingredients[j].ingredient;
+        if (ingred!=''){listWords.push(ingred)};
+      }
+   }
+   listWords =[...listWords, ...listDescript, ...listName];
+   listWords =[... new Set(listWords)];
 
-
-function fusionList(myList,tempSearch){     //CETTE FONCTION POUR L'ALGO 2 #####################################
-tempSearch = [...tempSearch, ...ustensilsList, ...applianceList, ...searchWords]; 
+  for (let j=0; j<tempSearch.length; j++){
+    for (let k=0; k<listWords.length;k++){
+      if (tempSearch[j]!='...'&&listWords[k].includes(tempSearch[j])){newList.push(myList[i])}
+    }
     
-highArray = tempSearch               
+  Nbcalc+=listWords.length*tempSearch.length;
+  }
+console.log('calcs',Nbcalc);
+}
+newList =[... new Set(newList)];
+}
 
-newList = myList.filter(recip =>     
+
+/*function fusionList(myList,tempSearch){     //CETTE FONCTION POUR L'ALGO 2 ##############
+tempSearch = [...tempSearch, ...ustensilsList, ...applianceList, ...searchWords];      //##
+                                                                                       //## 
+highArray = tempSearch                                                                 //##            
+let Nbcalc=0;                                                                          //##
+newList = myList.filter(recip =>   {                                                   //##
   tempSearch.every(key =>           
       recip.keywords.some(keyword => keyword.includes(key)) ||
       recip.appliance.includes(key) ||
       recip.ustensils.some(keyword => keyword.includes(key))
-  ))
-}
+  );
+  Nbcalc+=recip.keywords.length+recip.ustensils.length+1;})
+console.log('calcs',Nbcalc*tempSearch.length);
+}*/
 
 
 // displayDOM.js  *******************************************************************************
@@ -432,7 +455,7 @@ function displayCardDOM(myList){
 }
 
 
-let datasearchvalue="pomme";
+
 fetch('recipes.json')                          
   .then(function (recipes) {
     if (recipes.status !== 200) {
@@ -443,12 +466,12 @@ fetch('recipes.json')
     recipes.json().then(function (list) { 
         
 let  start = new Date().getTime();        
-        // recipesList = list;                        //******* CETTE LIGNE POUR L'ALGO 1 *******/
-        recipesList=createKeywordList(list);          //******* CETTE LIGNE POUR L'ALGO 2 *******/
+        recipesList = list;                             //******* CETTE LIGNE POUR L'ALGO 1 *******/
+        //recipesList=createKeywordList(list);          //******* CETTE LIGNE POUR L'ALGO 2 *******/
         datasearch.addEventListener('input',function() {
 
            
-          filterDisplay(recipesList,datasearchvalue)})     
+          filterDisplay(recipesList,datasearch.value)})     
 let end = new Date().getTime();          
 console.log((end - start) + ' ms');          //******* calcul du temps de réponse  *****/
         }) 

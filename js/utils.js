@@ -35,7 +35,7 @@ function highlight (arr) {                     //ajoute un <span> pour mettre en
     for (let i = 0; i < arr.length; i++) {
       let tempStr = elem.innerHTML;            //mise en place sur le mot en minuscule
       let Arr = arr[i].slice(0, 1).toUpperCase() + arr[i].slice(1);
-      if (arr[i] != 'span'&& arr[i] !='spa'){  //potentiel problème avec keyword "span" en 2ème ?
+      if (arr[i] != 'span'&& arr[i] !='spa' && arr[i]!='...'){  //potentiel problème avec keyword "span" en 2ème ?
         elem.innerHTML = tempStr.replaceAll(
           `${arr[i]}`,`<span class='highlight'>${arr[i]}</span>`);
         tempStr = elem.innerHTML;               //mise en place sur le mot avec Majuscule initiale

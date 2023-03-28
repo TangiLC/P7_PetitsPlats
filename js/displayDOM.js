@@ -65,7 +65,10 @@ fetch('./data/recipes.json')                          //récupération asynchron
     }
 
     recipes.json().then(function (list) {  
+      let  start = new Date().getTime();
         recipesList=createKeywordList(list);          //lancement de la création des keywords dans le json
+        let end = new Date().getTime();          
+        console.log((end - start) + ' ms');          //******* calcul du temps de réponse  *****/
         datasearch.addEventListener('input',function() {
           filterDisplay(recipesList,datasearch.value)})     //écoute de la saisie utilisateur
 
