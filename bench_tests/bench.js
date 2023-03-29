@@ -276,7 +276,8 @@ function closeModal(sua){
 
 // keywordSearch.js  *******************************************************************************************
 
-const datasearch = document.querySelector('.main_input')
+const datasearch = document.querySelector('.main_input');
+const radioButton = document.getElementById('algo1');
 
 let searchWords = []        //liste globale des mots recherchés antérieurs
 let ustensilsList = []      //liste globale des mots recherchés dans ustensils
@@ -340,61 +341,60 @@ function createKeywordList (list) {
   return list
 }
 
-function fusionList(myList,tempSearch){    //CETTE FONCTION POUR L'ALGO 1 #########################
-tempSearch = [...tempSearch, ...ustensilsList, ...applianceList, ...searchWords];              //##
-                                                                                               //##
-highArray = tempSearch                                                                         //##        
-newList =[];                                                                                   //##
+//Fonction de fusion de toutes les sources de mots (name, description, ingredients) et création
+//de la liste filtrée (newList) des résultats selon entrées utilisateur (tempSearch)
+function fusionList(myList,tempSearch){    
+let  start = new Date().getTime();
+tempSearch = [...tempSearch, ...ustensilsList, ...applianceList, ...searchWords];              
+console.log(tempSearch);                                                                                               
+highArray = tempSearch;                                                                                 
+newList =[];                                                                                   
 let listWords=[];
-let Nbcalc=0;
-for (let i=0;i<myList.length;i++){
-   listWords=[];
-   listWords[0] = myList[i].appliance;
-   let listDescript = superSplit(myList[i].description);
-   let listName = superSplit(myList[i].name);
+
+
+if (radioButton.checked ==true) {      //CETTE FONCTION POUR L'ALGO 1 #############
+  for (let i=0;i<myList.length;i++){
+    listWords=[];
+    listWords[0] = myList[i].appliance;
+    let listDescript = superSplit(myList[i].description);
+    let listName = superSplit(myList[i].name);
    
-   for (let j=0; j<myList[i].ustensils.length;j++){
-     listWords.push(myList[i].ustensils[j]);}
+    for (let j=0; j<myList[i].ustensils.length;j++){
+      listWords.push(myList[i].ustensils[j]);}
    
-   for (let j=0; j<myList[i].ingredients.length;j++){
+    for (let j=0; j<myList[i].ingredients.length;j++){
       if (myList[i].ingredients[j].hasOwnProperty('ingredient')) {
-        let ingred=myList[i].ingredients[j].ingredient;
-        if (ingred!=''){listWords.push(ingred)};
+        let ingred= superSplit(myList[i].ingredients[j].ingredient);
+        if (ingred.length==1){listWords.push(ingred)}
+        else if (ingred.length>1){listWords=listWords.concat(ingred)};
       }
-   }
-   listWords =[...listWords, ...listDescript, ...listName];
-   listWords =[... new Set(listWords)];
-
-  for (let j=0; j<tempSearch.length; j++){
-    for (let k=0; k<listWords.length;k++){
-      if (tempSearch[j]!='...'&&listWords[k].includes(tempSearch[j])){newList.push(myList[i])}
     }
-    
-  Nbcalc+=listWords.length*tempSearch.length;
+    listWords =[...listWords, ...listDescript, ...listName];
+    listWords =[... new Set(listWords)];
+    //console.log(myList[i].name,listWords);
+    if (tempSearch.every(key =>listWords.includes(key))){newList.push(myList[i])}
   }
-console.log('calcs',Nbcalc);
+  
+  newList =[... new Set(newList)];
 }
-newList =[... new Set(newList)];
-}
-
-
-/*function fusionList(myList,tempSearch){     //CETTE FONCTION POUR L'ALGO 2 ##############
-tempSearch = [...tempSearch, ...ustensilsList, ...applianceList, ...searchWords];      //##
-                                                                                       //## 
-highArray = tempSearch                                                                 //##            
-let Nbcalc=0;                                                                          //##
-newList = myList.filter(recip =>   {                                                   //##
-  tempSearch.every(key =>           
+else {                               //CETTE FONCTION POUR L'ALGO 2 ##############
+  for (let i=0;i<myList.length;i++){console.log(myList[i].name,myList[i].keywords)};
+  newList = myList.filter(recip =>                                                     
+    tempSearch.every(key =>           
       recip.keywords.some(keyword => keyword.includes(key)) ||
       recip.appliance.includes(key) ||
       recip.ustensils.some(keyword => keyword.includes(key))
-  );
-  Nbcalc+=recip.keywords.length+recip.ustensils.length+1;})
-console.log('calcs',Nbcalc*tempSearch.length);
-}*/
+    )
+  )
+  
+}
+let end = new Date().getTime();          
+console.log((end - start)*10 + ' ms');    //******* calcul du temps de réponse  *****/
+recipNb.innerText+=`  (${(end-start)*10}ms)`;          
+}
 
 
-// displayDOM.js  *******************************************************************************
+// displayDOM.js  *****************************************************************
 
 const mainForm=document.querySelector(".main_form");
 const cardGrid= document.getElementById("cardGrid"); 
@@ -465,15 +465,14 @@ fetch('recipes.json')
 
     recipes.json().then(function (list) { 
         
-let  start = new Date().getTime();        
-        recipesList = list;                             //******* CETTE LIGNE POUR L'ALGO 1 *******/
-        //recipesList=createKeywordList(list);          //******* CETTE LIGNE POUR L'ALGO 2 *******/
+        
+        if (radioButton.checked ==true) {recipesList = list }   //******* CETTE LIGNE POUR L'ALGO 1 *******/
+        else {recipesList=createKeywordList(list) }             //******* CETTE LIGNE POUR L'ALGO 2 *******/
         datasearch.addEventListener('input',function() {
 
            
           filterDisplay(recipesList,datasearch.value)})     
-let end = new Date().getTime();          
-console.log((end - start) + ' ms');          //******* calcul du temps de réponse  *****/
+
         }) 
     })
   

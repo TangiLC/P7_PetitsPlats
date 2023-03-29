@@ -68,3 +68,20 @@ function addTagOnclick (sua, mystring) {      //création des tags de recherche 
   ;['s', 'u', 'a'].forEach(el => closeModal(el));  //closeModal permet la mise à jour de la liste des keywords
   openModal(sua);
 }
+
+function noAccent(str){
+  let strArray=str.split('');
+  let accents=[{'raw':'a','accent':['à','ä','â']},
+               {'raw':'e','accent':['é','è','ê','ë']},
+               {'raw':'i','accent':['ï','î']},
+               {'raw':'o','accent':['ö','ô']},
+               {'raw':'u','accent':['ù','ü','û']}]
+  for (let i=0;i<strArray.length;i++){
+    for (let j=0;j<accents.length;j++){
+    if (accents[j].accent.some(letter =>letter.includes(strArray[i]))){
+      strArray[i]=accents[j].raw;   
+      }
+    }
+  }
+  return strArray.join('');
+}

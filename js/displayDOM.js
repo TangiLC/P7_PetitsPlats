@@ -26,6 +26,7 @@ function deleteTag(val,item){           //suppression du keyword dans la liste
       ustensilsList.splice(indx,1);
       }
   ['s','u','a'].forEach((e) => closeModal(e));
+  datasearch.placeholder="Affinez votre recherche";
   filterDisplay(recipesList,'tlc');            //reset de l'affichage
 }
 
