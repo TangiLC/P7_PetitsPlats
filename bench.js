@@ -55,7 +55,7 @@ function cardDOM(elem){
     innerContent.appendChild(innerLeft);
     
     const innerRight = document.createElement("div");
-    innerRight.textContent = cardDescription.slice(0,175)+"...";
+    innerRight.textContent = cardDescription.slice(0,175)+ (cardDescription.length>172?"...":"");
     innerRight.setAttribute("class","inner_right tag_check");
     innerContent.appendChild(innerRight);
     
