@@ -389,8 +389,8 @@ else {                               //CETTE FONCTION POUR L'ALGO 2 ############
   
 }
 let end = new Date().getTime();          
-console.log((end - start)*10 + ' ms');    //******* calcul du temps de réponse  *****/
-recipNb.innerText+=`  (${(end-start)*10}ms)`;          
+console.log((end - start) + ' ms');    //******* calcul du temps de réponse  *****/
+document.querySelector('#msTime').innerText=`(${(end-start)}ms)`;          
 }
 
 
