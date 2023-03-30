@@ -41,17 +41,37 @@ function filterDisplay (myList, val) {
 }
 
 
-function listSearch(myList,tempSearch){//fusion de toutes les liste de mots-clés pour recherche globale
-tempSearch = [...tempSearch, ...ustensilsList, ...applianceList, ...searchWords]; 
-    console.log(tempSearch);
-highArray = tempSearch               //******   FILTRE DE LA LISTE DES RECETTES CONTRE LES MOTS-CLÉS   ******//
-                                     //la liste filtrée (newlist) des recettes contient l'objet recette de la
-newList = myList.filter(recip =>     //liste json initiale(myList) si CHAQUE mot-clé de la liste de recherche 
-  tempSearch.every(key =>            //est INCLUS dans UN DES mot des listes ingredients OU name OU description OU ustensils OU appliance
-      recip.ingredients.map(x=>x.ingredient).some(ingredient => ingredient.toLowerCase().includes(key)) ||
-      recip.name.split(' ').some(rName => rName.toLowerCase().includes(key)) ||
-      recip.description.split(' ').some(descr => descr.toLowerCase().includes(key)) ||
-      recip.appliance.includes(key) ||
-      recip.ustensils.some(keyword => keyword.includes(key))
-  ))
-}
+function listSearch(myList,tempSearch){      //CETTE FONCTION POUR L'ALGO 1 #############
+  let  start = new Date().getTime();
+  tempSearch = [...tempSearch, ...ustensilsList, ...applianceList, ...searchWords];              
+  console.log(tempSearch);                                                                                               
+  highArray = tempSearch;                                                                                 
+  newList =[];                                                                                   
+  let listWords=[];
+  
+  
+  
+    for (let i=0;i<myList.length;i++){
+      listWords=[];
+      listWords[0] = myList[i].appliance;
+      let listDescript = superSplit(myList[i].description);
+      let listName = superSplit(myList[i].name);
+     
+      for (let j=0; j<myList[i].ustensils.length;j++){
+        listWords.push(myList[i].ustensils[j]);}
+     
+      for (let j=0; j<myList[i].ingredients.length;j++){
+        if (myList[i].ingredients[j].hasOwnProperty('ingredient')) {
+          let ingred= superSplit(myList[i].ingredients[j].ingredient);
+          if (ingred.length==1){listWords.push(ingred)}
+          else if (ingred.length>1){listWords=listWords.concat(ingred)};
+        }
+      }
+      listWords =[...listWords, ...listDescript, ...listName];
+      listWords =[... new Set(listWords)];
+      //console.log(myList[i].name,listWords);
+      if (tempSearch.every(key =>listWords.includes(key))){newList.push(myList[i])}
+    }
+    
+    newList =[... new Set(newList)];
+  }

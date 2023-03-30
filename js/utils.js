@@ -20,13 +20,13 @@ function moreThanThree (myList) {    //suppression des mots de moins de 3 lettre
           returnedList.push(tempString.slice(1) + ' ')}
         }}}
   return returnedList;
-}
+}*/
 
 function superSplit (str) {               //récupère les mots de description en liste sans (".,-')
   let ssplit = str.split('(').join(',').split(')').join(',').split(' ').join(',')
         .split('.').join(',').split("'").join(',').split('-').join(',').split(',');
   return ssplit;
-}*/
+}
 
 function highlight (arr) {                     //ajoute un <span> pour mettre en évidence le mot
   const tagCheck = document.querySelectorAll('.tag_check');
