@@ -25,7 +25,7 @@ function addTagInList(){
 }
 
 function filterDisplay (myList, val) {
-   
+  openModal('s'); 
   if (val.length > 2) {     //filtre de la liste lorsque la saisie utilisateur >2
     let tempSearch = [val.toLowerCase()]
 
