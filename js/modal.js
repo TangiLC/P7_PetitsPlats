@@ -10,7 +10,7 @@ function verifDouble(tlist,in_us_apList){    //vérif entre liste entrées utili
       in_us_apList.push(searchWords[j]);
       searchWords.splice(j,1);
       tlist.splice(indx,1);
-      filterDisplay(newList,'tlc');
+      filterDisplay(newList,'...');
   }}
   return tlist;
 }

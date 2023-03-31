@@ -17,7 +17,7 @@ function moreThanThree (myList) {    //suppression des mots de moins de 3 lettre
         if (!isAlphanumeric(tempString)) {          //supprime le dernier caractère non pris en compte
           tempString = tempString.slice(0, -1)}     //dans la fonction superslice
         if (!isSmallWord(tempString)) {             //création de la liste des keywords
-          returnedList.push(tempString.slice(1) + ' ')}
+          returnedList.push(tempString.slice(1))}
         }}}
   return returnedList;
 }
@@ -64,7 +64,7 @@ function addTagOnclick (sua, mystring) {      //création des tags de recherche 
   if (sua == 'a') {
     applianceList.push(mystring);
     applianceList=[...new Set(applianceList)]}
-  filterDisplay(recipesList, 'tlc');
+  filterDisplay(recipesList, '...');
   ;['s', 'u', 'a'].forEach(el => closeModal(el));  //closeModal permet la mise à jour de la liste des keywords
   openModal(sua);
 }

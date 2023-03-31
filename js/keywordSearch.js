@@ -41,21 +41,21 @@ function filterDisplay (myList, val) {
   highlight(highArray)
 }
 
-function createKeywordList (list) {       //Création de la liste des keywords par recette
-  for (let i = 0; i < list.length; i++) { // ajout dans le fichier json list.json
-    let words = ['tlc']
+function createKeywordList (list) {         //Création de la liste des keywords par recette
+  for(let i=0;i<list.length;i++){           // ajout dans le fichier json list.json
+    let words = ['...'];                    
     
-    for (let j = 0; j < list[i].ingredients.length; j++) {
-      if (list[i].ingredients[j].hasOwnProperty('unit')) {
-        words.push(list[i].ingredients[j].unit)}
-    }
+    list[i].ingredients.forEach(ingred => function(){
+      if (ingred.hasOwnProperty('unit')) {
+        words.push(ingred.unit);}
+      })
     words = words.concat(moreThanThree(list[i].ingredients.map(x => x.ingredient)));
     words = words.concat(moreThanThree(superSplit(list[i].name)));
     words = words.concat(moreThanThree(superSplit(list[i].description)));
 
     words.sort();
     let keyWords = [...new Set(words)];
-    list[i]['keywords'] = keyWords;
+    list[i]['keywords'] = keyWords; console.log(keyWords);
   }
   return list
 }

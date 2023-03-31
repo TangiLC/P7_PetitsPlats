@@ -27,7 +27,7 @@ function deleteTag(val,item){           //suppression du keyword dans la liste
       }
   ['s','u','a'].forEach((e) => closeModal(e));
   datasearch.placeholder="Affinez votre recherche";
-  filterDisplay(recipesList,'tlc');            //reset de l'affichage
+  filterDisplay(recipesList,'...');            //reset de l'affichage
 }
 
 function displayCardDOM(myList){
