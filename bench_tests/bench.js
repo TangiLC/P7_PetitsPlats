@@ -341,6 +341,15 @@ function createKeywordList (list) {
   return list
 }
 
+
+function intersection(a, b){
+  var result = [];
+    while(a.length > 0 && b.length > 0){  
+   if      (a[0] < b[0] ){ a.shift(); }
+   else if (a[0] > b[0] ){ b.shift(); }
+   else {result.push(a.shift());b.shift();}
+}
+return result;}
 //Fonction de fusion de toutes les sources de mots (name, description, ingredients) et création
 //de la liste filtrée (newList) des résultats selon entrées utilisateur (tempSearch)
 function fusionList(myList,tempSearch){    
@@ -371,8 +380,16 @@ if (radioButton.checked ==true) {      //CETTE FONCTION POUR L'ALGO 1 ##########
     }
     listWords =[...listWords, ...listDescript, ...listName];
     listWords =[... new Set(listWords)];
-    //console.log(myList[i].name,listWords);
-    if (tempSearch.every(key =>listWords.includes(key))){newList.push(myList[i])}
+    let listresults=[];
+    for (let k=0; k<tempSearch.length;k++){
+      for(let j=0;j<listWords.length;j++){
+         if(listWords[j].includes(tempSearch[k])){listresults[k].push(myList[i])}
+    }}
+    if (listresults.length>1){
+       for (let k=0; k<listresults.length;k++){listresults[k]=[... new Set(listresults[k])]}
+       for (let k=1; k<listresults.length;k++)
+      {newList=intersection(listresults[0],listresults[k])}}
+    else {newList=listresults[0]}      
   }
   
   newList =[... new Set(newList)];
