@@ -40,16 +40,16 @@ function filterDisplay (myList, val) {
   highlight(highArray)
 }
 
-function intersection(a, b){
+function intersection(a, b){            //comparaison de liste et return éléments identiques
   var ai=0, bi=0;
   var result = [];
   while( ai < a.length && bi < b.length )
   {
-     if      (a[ai] < b[bi] ){ ai++; }
-     else if (a[ai] > b[bi] ){ bi++; }
-     else /* they're equal */
+     if      (a[ai] < b[bi] ){ ai++; }   //avancer de 1 cran dans la liste a
+     else if (a[ai] > b[bi] ){ bi++; }   //avancer de 1 cran dans la liste b
+     else 
      {
-       result.push(a[ai]);
+       result.push(a[ai]);              //égalité : ajouter la donnée dans la liste intersection
        ai++;
        bi++;
      }
@@ -57,7 +57,7 @@ function intersection(a, b){
   return result;
 }
 
-function getId(ids,list){
+function getId(ids,list){                //récupérer les recettes à partir des id sélectionnées
 let returnList=[];
 for( let i=0;i<list.length;i++){
   for( let j=0;j<ids.length;j++){
@@ -78,9 +78,9 @@ newList =[];
 let listWords=[];
 let listresults=[];
 
-for (let k=0; k<tempSearch.length;k++){          //boucle dans les mots recherchés
+for (let k=0; k<tempSearch.length;k++){          //boucle dans les mots recherchés (saisie+tags)
   let tempResult=[];
-  for (let i=0;i<myList.length;i++){            //boucle dans chaque recette 0 à 49
+  for (let i=0;i<myList.length;i++){            //boucle dans chaque recette du fichier json
     listWords=[];
     listWords[0] = myList[i].appliance;
     let listDescript = superSplit(myList[i].description);
@@ -97,7 +97,7 @@ for (let k=0; k<tempSearch.length;k++){          //boucle dans les mots recherch
       }
     }
     listWords =[...listWords, ...listDescript, ...listName];
-    listWords =[... new Set(listWords)];
+    listWords =[... new Set(listWords)];             //création des mots-clés regroupés, sans doublons
     
     
       listresults[k]=[];
