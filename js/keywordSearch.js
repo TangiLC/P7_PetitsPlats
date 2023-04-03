@@ -34,7 +34,7 @@ function filterDisplay (myList, val) {
         addTagInList();
       }
     })
-    listSearch(myList,tempSearch);
+    fusionList(myList,tempSearch);
   }
   displayCardDOM(newList)               //Mise à jour de l'affichage
   highlight(highArray)
@@ -57,10 +57,11 @@ console.log(tempSearch);
 highArray = tempSearch;                                                                                 
 newList =[];                                                                                   
 let listWords=[];
+let listresults=[];
 
-
-
-  for (let i=0;i<myList.length;i++){
+for (let k=0; k<tempSearch.length;k++){          //boucle dans les mots recherchés
+  let tempResult=[];
+  for (let i=0;i<myList.length;i++){            //boucle dans chaque recette 0 à 49
     listWords=[];
     listWords[0] = myList[i].appliance;
     let listDescript = superSplit(myList[i].description);
@@ -78,17 +79,24 @@ let listWords=[];
     }
     listWords =[...listWords, ...listDescript, ...listName];
     listWords =[... new Set(listWords)];
-    let listresults=[];
-    for (let k=0; k<tempSearch.length;k++){
-      for(let j=0;j<listWords.length;j++){
-         if(listWords[j].includes(tempSearch[k])){listresults[k].push(myList[i])}
-    }}
-    if (listresults.length>1){
+    
+    
+      listresults[k]=[];
+      for(let j=0;j<listWords.length;j++){           //boucle dans les mots-clés de la recette i
+         if(listWords[j].includes(tempSearch[k])){tempResult.push(myList[i]);
+          console.log(myList[i].name,tempResult.length);}
+      }
+    
+    if (tempResult.length>0){listresults[k]=(tempResult)}
+    }
+  }
+    console.log('list',listresults);
+    if (listresults.length>1){console.log('length',listresults.length);
        for (let k=0; k<listresults.length;k++){listresults[k]=[... new Set(listresults[k])]}
        for (let k=1; k<listresults.length;k++)
       {newList=intersection(listresults[0],listresults[k])}}
     else {newList=listresults[0]}      
-  }
+  
   
   newList =[... new Set(newList)];
 }
