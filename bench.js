@@ -416,10 +416,10 @@ if (radioButton.checked ==true) {      //CETTE FONCTION POUR L'ALGO 1 ##########
     }
       console.log('list',listresults);
       let idList=[];
-      if (listresults.length>1){
-         for (let k=0; k<listresults.length;k++){listresults[k]=[... new Set(listresults[k])]}
-         for (let k=1; k<listresults.length;k++){idList=intersection(listresults[k-1],listresults[k])}}
-      else {idList=listresults[0]}      
+      if (listresults.length>1){idList=listresults[0];
+        for (let k=0; k<listresults.length;k++){listresults[k]=[... new Set(listresults[k])]}
+        for (let k=1; k<listresults.length;k++){idList=intersection(idList,listresults[k])}}
+     else {idList=listresults[0]}      
     
     newList =getId(idList,recipesList);
     newList =[... new Set(newList)];
