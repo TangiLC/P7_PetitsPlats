@@ -107,7 +107,7 @@ for (let k=0; k<tempSearch.length;k++){          //boucle dans les mots recherch
       }
     
     if (tempResult.length>0){tempResult=[... new Set(tempResult)];
-      listresults[k]=tempResult.sort()}
+      listresults[k]=tempResult.sort(function(a,b){return a-b})}
     }
   }
     console.log('list',listresults);
