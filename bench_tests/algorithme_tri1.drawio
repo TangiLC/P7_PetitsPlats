@@ -148,7 +148,7 @@
                 </mxCell>
                 <mxCell id="134" value="non" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;rotation=0;" parent="133" connectable="0" vertex="1">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="-14" as="offset"/>
+                        <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="135" value="ajout ingr# à la liste des mots-clés" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
