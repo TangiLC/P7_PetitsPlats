@@ -382,9 +382,12 @@ if (radioButton.checked ==true) {      //CETTE FONCTION POUR L'ALGO 1 ##########
     listWords =[... new Set(listWords)];
     let listresults=[];
     for (let k=0; k<tempSearch.length;k++){
+      let subList=[];
       for(let j=0;j<listWords.length;j++){
-         if(listWords[j].includes(tempSearch[k])){listresults[k].push(myList[i])}
-    }}
+         if(listWords[j].includes(tempSearch[k])){subList.push(myList[i]); console.log(myList[i].name)}
+    }
+    listresults[k]=subList; console.log(k,listresults[k]);
+  }
     if (listresults.length>1){
        for (let k=0; k<listresults.length;k++){listresults[k]=[... new Set(listresults[k])]}
        for (let k=1; k<listresults.length;k++)
@@ -407,7 +410,7 @@ else {                               //CETTE FONCTION POUR L'ALGO 2 ############
 }
 let end = new Date().getTime();          
 console.log((end - start)*10 + ' ms');    //******* calcul du temps de réponse  *****/
-recipNb.innerText+=`  (${(end-start)*10}ms)`;          
+document.querySelector('#results').innerText=`temps de traitement: (${(end-start)}ms)`;          
 }
 
 
