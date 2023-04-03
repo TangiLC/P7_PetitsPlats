@@ -89,7 +89,7 @@ function closeModal(sua){                     //fermeture modale. Retour à l'é
         target=appare;
         }
     target.style.removeProperty("height");
-    console.log(appare.style.height,ustens.style.height,ingred.style.height)
+    
     if (appare.style.height==''&&
         ustens.style.height==''&&
         ingred.style.height==''){    

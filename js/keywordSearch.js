@@ -41,13 +41,32 @@ function filterDisplay (myList, val) {
 }
 
 function intersection(a, b){
+  var ai=0, bi=0;
   var result = [];
-    while(a.length > 0 && b.length > 0){  
-   if      (a[0] < b[0] ){ a.shift(); }
-   else if (a[0] > b[0] ){ b.shift(); }
-   else {result.push(a.shift());b.shift();}
+  while( ai < a.length && bi < b.length )
+  {
+     if      (a[ai] < b[bi] ){ ai++; }
+     else if (a[ai] > b[bi] ){ bi++; }
+     else /* they're equal */
+     {
+       result.push(a[ai]);
+       ai++;
+       bi++;
+     }
+  }
+  return result;
 }
-return result;}
+
+function getId(ids,list){
+let returnList=[];
+for( let i=0;i<list.length;i++){
+  for( let j=0;j<ids.length;j++){
+  if(list[i].id==ids[j]){returnList.push(list[i])}
+}}
+return returnList;
+}
+
+
 //Fonction de fusion de toutes les sources de mots (name, description, ingredients) et création
 //de la liste filtrée (newList) des résultats selon entrées utilisateur (tempSearch)
 function fusionList(myList,tempSearch){    
@@ -83,20 +102,21 @@ for (let k=0; k<tempSearch.length;k++){          //boucle dans les mots recherch
     
       listresults[k]=[];
       for(let j=0;j<listWords.length;j++){           //boucle dans les mots-clés de la recette i
-         if(listWords[j].includes(tempSearch[k])){tempResult.push(myList[i]);
-          console.log(myList[i].name,tempResult.length);}
+         if(listWords[j].includes(tempSearch[k])){tempResult.push(myList[i].id);
+          }
       }
     
-    if (tempResult.length>0){listresults[k]=(tempResult)}
+    if (tempResult.length>0){tempResult=[... new Set(tempResult)];
+      listresults[k]=tempResult.sort()}
     }
   }
     console.log('list',listresults);
-    if (listresults.length>1){console.log('length',listresults.length);
+    let idList=[];
+    if (listresults.length>1){idList=listresults[0];
        for (let k=0; k<listresults.length;k++){listresults[k]=[... new Set(listresults[k])]}
-       for (let k=1; k<listresults.length;k++)
-      {newList=intersection(listresults[0],listresults[k])}}
-    else {newList=listresults[0]}      
+       for (let k=1; k<listresults.length;k++){idList=intersection(idList,listresults[k])}}
+    else {idList=listresults[0]}      
   
-  
+  newList =getId(idList,recipesList);
   newList =[... new Set(newList)];
 }
