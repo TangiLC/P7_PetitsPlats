@@ -411,7 +411,7 @@ if (radioButton.checked ==true) {      //CETTE FONCTION POUR L'ALGO 1 ##########
         }
       
       if (tempResult.length>0){tempResult=[... new Set(tempResult)];
-        listresults[k]=tempResult.sort()}
+        listresults[k]=tempResult.sort(function(a,b){return a-b})}
       }
     }
       console.log('list',listresults);
@@ -505,7 +505,7 @@ function displayCardDOM(myList){
 
 
 
-fetch('recipes.json')                          
+fetch('recipes150.json')                          
   .then(function (recipes) {
     if (recipes.status !== 200) {
       console.log('Problem. Status Code: ' + recipes.status);
