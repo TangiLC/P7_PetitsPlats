@@ -341,6 +341,17 @@ function createKeywordList (list) {
   return list
 }
 
+function intersection(a, b){
+  var result = [];
+    while(a.length > 0 && b.length > 0){  
+   if      (a[0] < b[0] ){ a.shift(); }
+   else if (a[0] > b[0] ){ b.shift(); }
+   else {result.push(a.shift());b.shift();}
+}
+return result;}
+
+
+
 //Fonction de fusion de toutes les sources de mots (name, description, ingredients) et création
 //de la liste filtrée (newList) des résultats selon entrées utilisateur (tempSearch)
 function fusionList(myList,tempSearch){    
@@ -350,33 +361,53 @@ console.log(tempSearch);
 highArray = tempSearch;                                                                                 
 newList =[];                                                                                   
 let listWords=[];
+let listresults=[];
 
 
 if (radioButton.checked ==true) {      //CETTE FONCTION POUR L'ALGO 1 #############
-  for (let i=0;i<myList.length;i++){
-    listWords=[];
-    listWords[0] = myList[i].appliance;
-    let listDescript = superSplit(myList[i].description);
-    let listName = superSplit(myList[i].name);
-   
-    for (let j=0; j<myList[i].ustensils.length;j++){
-      listWords.push(myList[i].ustensils[j]);}
-   
-    for (let j=0; j<myList[i].ingredients.length;j++){
-      if (myList[i].ingredients[j].hasOwnProperty('ingredient')) {
-        let ingred= superSplit(myList[i].ingredients[j].ingredient);
-        if (ingred.length==1){listWords.push(ingred)}
-        else if (ingred.length>1){listWords=listWords.concat(ingred)};
+
+  for (let k=0; k<tempSearch.length;k++){          //boucle dans les mots recherchés
+    let tempResult=[];
+    for (let i=0;i<myList.length;i++){            //boucle dans chaque recette 0 à 49
+      listWords=[];
+      listWords[0] = myList[i].appliance;
+      let listDescript = superSplit(myList[i].description);
+      let listName = superSplit(myList[i].name);
+     
+      for (let j=0; j<myList[i].ustensils.length;j++){
+        listWords.push(myList[i].ustensils[j]);}
+     
+      for (let j=0; j<myList[i].ingredients.length;j++){
+        if (myList[i].ingredients[j].hasOwnProperty('ingredient')) {
+          let ingred= superSplit(myList[i].ingredients[j].ingredient);
+          if (ingred.length==1){listWords.push(ingred)}
+          else if (ingred.length>1){listWords=listWords.concat(ingred)};
+        }
+      }
+      listWords =[...listWords, ...listDescript, ...listName];
+      listWords =[... new Set(listWords)];
+      
+      
+        listresults[k]=[];
+        for(let j=0;j<listWords.length;j++){           //boucle dans les mots-clés de la recette i
+           if(listWords[j].includes(tempSearch[k])){tempResult.push(myList[i]);
+            console.log(myList[i].name,tempResult.length);}
+        }
+      
+      if (tempResult.length>0){listresults[k]=(tempResult)}
       }
     }
-    listWords =[...listWords, ...listDescript, ...listName];
-    listWords =[... new Set(listWords)];
-    //console.log(myList[i].name,listWords);
-    if (tempSearch.every(key =>listWords.includes(key))){newList.push(myList[i])}
+      console.log('list',listresults);
+      if (listresults.length>1){console.log('length',listresults.length);
+         for (let k=0; k<listresults.length;k++){listresults[k]=[... new Set(listresults[k])]}
+         for (let k=1; k<listresults.length;k++)
+        {newList=intersection(listresults[0],listresults[k])}}
+      else {newList=listresults[0]}      
+    
+    
+    newList =[... new Set(newList)];
   }
-  
-  newList =[... new Set(newList)];
-}
+
 else {                               //CETTE FONCTION POUR L'ALGO 2 ##############
   for (let i=0;i<myList.length;i++){console.log(myList[i].name,myList[i].keywords)};
   newList = myList.filter(recip =>                                                     
@@ -390,7 +421,7 @@ else {                               //CETTE FONCTION POUR L'ALGO 2 ############
 }
 let end = new Date().getTime();          
 console.log((end - start) + ' ms');    //******* calcul du temps de réponse  *****/
-document.querySelector('#msTime').innerText=`(${(end-start)}ms)`;          
+document.querySelector('#msTime').innerText+=`<itération :${tempSearch.length}>(temps :${(end-start)}ms)`;          
 }
 
 
