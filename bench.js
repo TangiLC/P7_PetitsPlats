@@ -278,7 +278,7 @@ function closeModal(sua){
 
 const datasearch = document.querySelector('.main_input');
 const radioButton = document.getElementById('algo1');
-
+let totalTime=0;
 let searchWords = []        //liste globale des mots recherchés antérieurs
 let ustensilsList = []      //liste globale des mots recherchés dans ustensils
 let applianceList = []      //liste globale des mots recherchés dans appliances
@@ -342,14 +342,30 @@ function createKeywordList (list) {
 }
 
 function intersection(a, b){
-  var result = [];
-    while(a.length > 0 && b.length > 0){  
-   if      (a[0] < b[0] ){ a.shift(); }
-   else if (a[0] > b[0] ){ b.shift(); }
-   else {result.push(a.shift());b.shift();}
-}
-return result;}
+    var ai=0, bi=0;
+    var result = [];
+    while( ai < a.length && bi < b.length )
+    {
+       if      (a[ai] < b[bi] ){ ai++; }
+       else if (a[ai] > b[bi] ){ bi++; }
+       else /* they're equal */
+       {
+         result.push(a[ai]);
+         ai++;
+         bi++;
+       }
+    }
+    return result;
+  }
 
+function getId(ids,list){
+  let returnList=[];
+  for( let i=0;i<list.length;i++){
+    for( let j=0;j<ids.length;j++){
+    if(list[i].id==ids[j]){returnList.push(list[i])}
+  }}
+  return returnList;
+}
 
 
 //Fonction de fusion de toutes les sources de mots (name, description, ingredients) et création
@@ -390,21 +406,22 @@ if (radioButton.checked ==true) {      //CETTE FONCTION POUR L'ALGO 1 ##########
       
         listresults[k]=[];
         for(let j=0;j<listWords.length;j++){           //boucle dans les mots-clés de la recette i
-           if(listWords[j].includes(tempSearch[k])){tempResult.push(myList[i]);
-            console.log(myList[i].name,tempResult.length);}
+           if(listWords[j].includes(tempSearch[k])){tempResult.push(myList[i].id);
+            }
         }
       
-      if (tempResult.length>0){listresults[k]=(tempResult)}
+      if (tempResult.length>0){tempResult=[... new Set(tempResult)];
+        listresults[k]=tempResult.sort()}
       }
     }
       console.log('list',listresults);
-      if (listresults.length>1){console.log('length',listresults.length);
+      let idList=[];
+      if (listresults.length>1){
          for (let k=0; k<listresults.length;k++){listresults[k]=[... new Set(listresults[k])]}
-         for (let k=1; k<listresults.length;k++)
-        {newList=intersection(listresults[0],listresults[k])}}
-      else {newList=listresults[0]}      
+         for (let k=1; k<listresults.length;k++){idList=intersection(listresults[k-1],listresults[k])}}
+      else {idList=listresults[0]}      
     
-    
+    newList =getId(idList,recipesList);
     newList =[... new Set(newList)];
   }
 
@@ -419,9 +436,10 @@ else {                               //CETTE FONCTION POUR L'ALGO 2 ############
   )
   
 }
-let end = new Date().getTime();          
+let end = new Date().getTime();  
+totalTime +=(end - start);     
 console.log((end - start) + ' ms');    //******* calcul du temps de réponse  *****/
-document.querySelector('#msTime').innerText+=`<itération :${tempSearch.length}>(temps :${(end-start)}ms)`;          
+document.querySelector('#msTime').innerText=`<recherche :${tempSearch.length}>${(end-start)}ms(total:${totalTime}ms)`;          
 }
 
 
