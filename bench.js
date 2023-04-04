@@ -386,23 +386,14 @@ if (radioButton.checked ==true) {      //CETTE FONCTION POUR L'ALGO 1 ##########
     let tempResult=[];
     for (let i=0;i<myList.length;i++){            //boucle dans chaque recette 0 à 49
       listWords=[];
-      listWords[0] = myList[i].appliance;
-      let listDescript = superSplit(myList[i].description);
-      let listName = superSplit(myList[i].name);
-     
+      listWords=(myList[i].keywords);
+      listWords.push(myList[i].appliance);
+           
       for (let j=0; j<myList[i].ustensils.length;j++){
         listWords.push(myList[i].ustensils[j]);}
-     
-      for (let j=0; j<myList[i].ingredients.length;j++){
-        if (myList[i].ingredients[j].hasOwnProperty('ingredient')) {
-          let ingred= superSplit(myList[i].ingredients[j].ingredient);
-          if (ingred.length==1){listWords.push(ingred)}
-          else if (ingred.length>1){listWords=listWords.concat(ingred)};
-        }
-      }
-      listWords =[...listWords, ...listDescript, ...listName];
+  
       listWords =[... new Set(listWords)];
-      
+      console.log(listWords);
       
         listresults[k]=[];
         for(let j=0;j<listWords.length;j++){           //boucle dans les mots-clés de la recette i
@@ -426,7 +417,7 @@ if (radioButton.checked ==true) {      //CETTE FONCTION POUR L'ALGO 1 ##########
   }
 
 else {                               //CETTE FONCTION POUR L'ALGO 2 ##############
-  for (let i=0;i<myList.length;i++){console.log(myList[i].name,myList[i].keywords)};
+  
   newList = myList.filter(recip =>                                                     
     tempSearch.every(key =>           
       recip.keywords.some(keyword => keyword.includes(key)) ||
@@ -515,8 +506,8 @@ fetch('recipes150.json')
     recipes.json().then(function (list) { 
         
         
-        if (radioButton.checked ==true) {recipesList = list }   //******* CETTE LIGNE POUR L'ALGO 1 *******/
-        else {recipesList=createKeywordList(list) }             //******* CETTE LIGNE POUR L'ALGO 2 *******/
+        
+        recipesList=createKeywordList(list)
         datasearch.addEventListener('input',function() {
 
            
