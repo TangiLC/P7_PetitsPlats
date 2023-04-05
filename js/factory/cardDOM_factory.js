@@ -18,7 +18,7 @@ articleCard.setAttribute("class","card_content");
 const cardImg = document.createElement("div");
 cardImg.setAttribute("class",`card_img bg${bgcoltype}`);
 cardImg.style.backgroundImage="url('./data/images/"+bgImg+"')";
-cardImg.innerHTML=`<img src='./data/images/${mainImg}' height='200px' width='200px'>`;
+cardImg.innerHTML=`<img src='./data/images/${mainImg}' height='200px' width='200px' alt='${cardTitle}'>`;
 articleCard.appendChild(cardImg);
 
 const innerTitle = document.createElement("div");
