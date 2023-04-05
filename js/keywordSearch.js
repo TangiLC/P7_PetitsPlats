@@ -25,19 +25,20 @@ function addTagInList(){
 }
 
 function filterDisplay (myList, val) {
-   
+  openModal('s');  
   if (val.length > 2) {     //filtre de la liste lorsque la saisie utilisateur >2
     let tempSearch = [val.toLowerCase()]
 
     datasearch.addEventListener('keydown', function (e) {
       if (e.keyCode === 13 && datasearch.value.length > 2) {
         addTagInList();
+        closeModal('s');
       }
     })
     fusionList(myList,tempSearch);
   }
-  displayCardDOM(newList)               //Mise à jour de l'affichage
-  highlight(highArray)
+  displayCardDOM(newList);               //Mise à jour de l'affichage
+  highlight(highArray);
 }
 
 function createKeywordList (list) {       //Création de la liste des keywords par recette
