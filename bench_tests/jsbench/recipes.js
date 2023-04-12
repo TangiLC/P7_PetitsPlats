@@ -1,4 +1,3 @@
-SearchList=['sucre','oeuf','lait'];
 const myrecipes = [
     {
         "id": 1,
