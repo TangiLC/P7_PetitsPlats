@@ -3,61 +3,11 @@
 //cardDOM_factory.js  **************************************************************************
 
 function cardDOM(elem){
-    let cardId=elem.id;
-    let cardTitle=elem.name;
-    let cardTime=elem.time;
-    let cardIngredients=elem.ingredients;
-    let cardDescription=elem.description;
-    let keywords=elem.keywords;
-    let bgImg =elem.artwork[0]; 
-    let bgcoltype = elem.artwork[1]; 
-    let mainImg=elem.artwork[2];
-    let ingredInnerHTML="";
-    
     
     
     const articleCard = document.createElement("article");
     articleCard.setAttribute("class","card_content");
     
-    const cardImg = document.createElement("div");
-    cardImg.setAttribute("class",`card_img bg${bgcoltype}`);
-    cardImg.style.backgroundImage="url('../data/images/"+bgImg+"')";
-    cardImg.innerHTML=`<img src='../data/images/${mainImg}' height='200px' width='200px'>`;
-    articleCard.appendChild(cardImg);
-    
-    const innerTitle = document.createElement("div");
-    innerTitle.setAttribute("class","title_row")
-    articleCard.appendChild(innerTitle);
-    
-    const titleName = document.createElement("div");
-    titleName.setAttribute("class","card_title tag_check");
-    titleName.textContent = cardTitle;
-    innerTitle.appendChild(titleName);
-    
-    const titleTime = document.createElement("div");
-    titleTime.setAttribute("class","card_time");
-    titleTime.innerHTML ="<i class='fa-regular fa-clock'></i>&nbsp;"+cardTime+" min";
-    innerTitle.appendChild(titleTime);
-    
-    const innerContent = document.createElement("div");
-    innerContent.setAttribute("class","content_row");
-    articleCard.appendChild(innerContent);
-    
-    const innerLeft = document.createElement("ul");
-    for (let j=0; j<cardIngredients.length; j++){
-        ingredInnerHTML+="<li class='tag_check'><span>"+cardIngredients[j].ingredient+"</span>";
-        if (cardIngredients[j].hasOwnProperty('quantity')){ingredInnerHTML+=" : "+cardIngredients[j].quantity}
-        if (cardIngredients[j].hasOwnProperty('unit')){ingredInnerHTML+=cardIngredients[j].unit}
-        ingredInnerHTML+="</li>";
-    }
-    innerLeft.innerHTML=ingredInnerHTML;
-    innerLeft.setAttribute("class","inner_left");
-    innerContent.appendChild(innerLeft);
-    
-    const innerRight = document.createElement("div");
-    innerRight.textContent = cardDescription.slice(0,175)+"...";
-    innerRight.setAttribute("class","inner_right tag_check");
-    innerContent.appendChild(innerRight);
     
     return articleCard;
     }
@@ -68,31 +18,6 @@ function createModal(sua,list,mssge){
     
     const modal=document.createElement('article');
     modal.setAttribute('class',`color_${sua}`);
-
-    const modalTitle=document.createElement('div');
-    modalTitle.setAttribute('class',`modal_${sua}`);
-    modal.appendChild(modalTitle);
-
-    const TitleMssg=document.createElement('div');
-    TitleMssg.setAttribute('class','modal_title');
-    TitleMssg.innerText=mssge;
-    modalTitle.appendChild(TitleMssg);
-
-    const TitleArrow=document.createElement('div');
-    TitleArrow.setAttribute('onclick',`closeModal('${sua}')`);
-    TitleArrow.innerHTML="<i class='fa-solid fa-angle-up'></i>";
-    modalTitle.appendChild(TitleArrow);
-
-    const modalContent=document.createElement('div');
-    modalContent.setAttribute('class',`modalcontent_${sua}`);
-    modal.appendChild(modalContent);
-        
-    for (let i=0; i<list.length; i++){
-       const baliseA=document.createElement('a');
-       baliseA.setAttribute("onclick",`addTagOnclick('${sua}','${list[i]}')`);
-       baliseA.innerText=list[i];
-       modalContent.appendChild(baliseA);
-    }
 
 return modal;    
 }
@@ -343,59 +268,78 @@ function createKeywordList (list) {
 
 
 function intersection(a, b){
-  var result = [];
-    while(a.length > 0 && b.length > 0){  
-   if      (a[0] < b[0] ){ a.shift(); }
-   else if (a[0] > b[0] ){ b.shift(); }
-   else {result.push(a.shift());b.shift();}
+    var ai=0, bi=0;
+    var result = [];
+    while( ai < a.length && bi < b.length )
+    {
+       if      (a[ai] < b[bi] ){ ai++; }
+       else if (a[ai] > b[bi] ){ bi++; }
+       else /* they're equal */
+       {
+         result.push(a[ai]);
+         ai++;
+         bi++;
+       }
+    }
+    return result;
+  }
+
+function getId(ids,list){
+  let returnList=[];
+  for( let i in list){
+    for( let j in ids){
+    if(list[i].id==ids[j]){returnList.push(list[i])}
+  }}
+  return returnList;
 }
-return result;}
+
+
 //Fonction de fusion de toutes les sources de mots (name, description, ingredients) et création
 //de la liste filtrée (newList) des résultats selon entrées utilisateur (tempSearch)
 function fusionList(myList,tempSearch){    
 let  start = new Date().getTime();
-tempSearch = [...tempSearch, ...ustensilsList, ...applianceList, ...searchWords];              
+tempSearch = ['lait','oeuf','sucre','beurre'];              
 console.log(tempSearch);                                                                                               
 highArray = tempSearch;                                                                                 
 newList =[];                                                                                   
 let listWords=[];
+let listresults=[];
 
+//CETTE FONCTION POUR L'ALGO 1 ###################################################################
 
-      //CETTE FONCTION POUR L'ALGO 1 #############
-  for (let i=0;i<myList.length;i++){
-    listWords=[];
-    listWords[0] = myList[i].appliance;
-    let listDescript = superSplit(myList[i].description);
-    let listName = superSplit(myList[i].name);
-   
-    for (let j=0; j<myList[i].ustensils.length;j++){
-      listWords.push(myList[i].ustensils[j]);}
-   
-    for (let j=0; j<myList[i].ingredients.length;j++){
-      if (myList[i].ingredients[j].hasOwnProperty('ingredient')) {
-        let ingred= superSplit(myList[i].ingredients[j].ingredient);
-        if (ingred.length==1){listWords.push(ingred)}
-        else if (ingred.length>1){listWords=listWords.concat(ingred)};
+  for (let k in tempSearch){          //boucle dans les mots recherchés
+    let tempResult=[];
+    for (let i in myList){            //boucle dans chaque recette 0 à 49
+      listWords=[];
+      listWords=(myList[i].keywords);
+      listWords.push(myList[i].appliance);
+           
+      for (let j=0; j<myList[i].ustensils.length;j++){
+        listWords.push(myList[i].ustensils[j]);}
+  
+      listWords =[... new Set(listWords)];
+      console.log(listWords);
+      
+        listresults[k]=[];
+        for(let j=0;j<listWords.length;j++){           //boucle dans les mots-clés de la recette i
+           if(listWords[j].includes(tempSearch[k])){tempResult.push(myList[i].id);
+            }
+        }
+      
+      if (tempResult.length>0){tempResult=[... new Set(tempResult)];
+        listresults[k]=tempResult.sort(function(a,b){return a-b})}
       }
     }
-    listWords =[...listWords, ...listDescript, ...listName];
-    listWords =[... new Set(listWords)];
-    let listresults=[];
-    for (let k=0; k<tempSearch.length;k++){
-      let subList=[];
-      for(let j=0;j<listWords.length;j++){
-         if(listWords[j].includes(tempSearch[k])){subList.push(myList[i]); console.log(myList[i].name)}
-    }
-    listresults[k]=subList; console.log(k,listresults[k]);
-  }
-    if (listresults.length>1){
-       for (let k=0; k<listresults.length;k++){listresults[k]=[... new Set(listresults[k])]}
-       for (let k=1; k<listresults.length;k++)
-      {newList=intersection(listresults[0],listresults[k])}}
-    else {newList=listresults[0]}      
-  }
-  
-  newList =[... new Set(newList)];
+      console.log('list',listresults);
+      let idList=[];
+      if (listresults.length>1){idList=listresults[0];
+        for (let k=0; k<listresults.length;k++){listresults[k]=[... new Set(listresults[k])]}
+        for (let k=1; k<listresults.length;k++){idList=intersection(idList,listresults[k])}}
+     else {idList=listresults[0]}      
+    
+    newList =getId(idList,recipesList);
+    newList =[... new Set(newList)];
+
 
 
 let end = new Date().getTime();          
@@ -463,7 +407,6 @@ function displayCardDOM(myList){
         }
     }
 }
-
 
 
 recipesList=createKeywordList(myrecipes);         
